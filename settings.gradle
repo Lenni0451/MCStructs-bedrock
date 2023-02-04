@@ -6,3 +6,7 @@ pluginManagement {
 }
 
 rootProject.name = "MCStructs-bedrock"
+
+include(":MCStructs-bedrock-all")
+include(":MCStructs-bedrock-nbt")
+include(":MCStructs-bedrock-text")

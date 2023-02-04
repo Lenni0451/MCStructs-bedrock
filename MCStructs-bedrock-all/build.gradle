@@ -1,0 +1,4 @@
+dependencies {
+    api project(":MCStructs-bedrock-nbt")
+    api project(":MCStructs-bedrock-text")
+}
