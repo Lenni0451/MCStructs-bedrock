@@ -35,9 +35,11 @@ public class RootBedrockComponent extends ABedrockComponent {
      * Add a component to this root component.
      *
      * @param component The component to add
+     * @return This root component
      */
-    public void addComponent(final ABedrockComponent component) {
+    public RootBedrockComponent addComponent(final ABedrockComponent component) {
         this.components.add(component);
+        return this;
     }
 
     @Override
