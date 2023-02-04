@@ -1,4 +1,6 @@
-package net.lenni0451.mcstructs_bedrock.text;
+package net.lenni0451.mcstructs_bedrock.text.utils;
+
+import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
 
 import java.util.function.Function;
 import java.util.regex.Matcher;
