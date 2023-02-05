@@ -1,6 +1,7 @@
 package net.lenni0451.mcstructs_bedrock.text.utils;
 
 import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.components.StringBedrockComponent;
 
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -49,8 +50,8 @@ public class BedrockTranslator {
                 start = matchEnd;
 
                 String match = matcher.group(1);
-                if (match.equals("d") || match.equals("s")) appendArg(out, getArg(args, argIndex++));
-                else appendArg(out, getArg(args, numArgOffset + Integer.parseInt(match) - 1));
+                if (match.equals("d") || match.equals("s")) out.append(getArg(args, translator, argIndex++));
+                else out.append(getArg(args, translator, numArgOffset + Integer.parseInt(match) - 1));
             }
             if (start < translated.length()) out.append(translated, start, translated.length());
         } else {
@@ -97,14 +98,20 @@ public class BedrockTranslator {
         return count;
     }
 
-    private static Object getArg(final Object[] args, final int index) {
+    private static String getArg(final Object[] args, final Function<String, String> translator, final int index) {
         if (index < 0 || index >= args.length) return "";
-        return args[index];
-    }
-
-    private static void appendArg(final StringBuilder out, final Object arg) {
-        if (arg instanceof ABedrockComponent) out.append(((ABedrockComponent) arg).asString());
-        else out.append(arg);
+        Object arg = args[index];
+        if (arg instanceof String) {
+            String s = (String) arg;
+            if (s.startsWith("%")) return translator.apply(s.substring(1));
+        } else if (arg instanceof StringBedrockComponent) {
+            StringBedrockComponent component = (StringBedrockComponent) arg;
+            if (component.getText().startsWith("%")) return translator.apply(component.getText().substring(1));
+            else return component.asString();
+        } else if (arg instanceof ABedrockComponent) {
+            return ((ABedrockComponent) arg).asString();
+        }
+        return arg.toString();
     }
 
 }

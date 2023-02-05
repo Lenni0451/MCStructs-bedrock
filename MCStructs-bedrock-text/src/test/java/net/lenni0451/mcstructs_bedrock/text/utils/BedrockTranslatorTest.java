@@ -33,6 +33,12 @@ class BedrockTranslatorTest {
             assertEquals(test.getTranslated(), BedrockTranslator.translate("", s -> test.getKey(), args));
             assertEquals(test.getDirectTranslation(), BedrockTranslator.translate(test.getKey(), s -> s, args));
         }
+
+        assertEquals("Now playing: Lena Raine - Pigstep", BedrockTranslator.translate("record.nowPlaying", s -> {
+            if (s.equals("record.nowPlaying")) return "Now playing: %s";
+            else if (s.equals("item.record_pigstep.desc")) return "Lena Raine - Pigstep";
+            else return s;
+        }, new Object[]{"%item.record_pigstep.desc"}));
     }
 
 }
