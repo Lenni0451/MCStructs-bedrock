@@ -32,7 +32,7 @@ public class BedrockTranslator {
      * @param args       The arguments to insert
      * @return The translated string
      */
-    public static String translate(final String key, final Function<String, String> translator, final Object... args) {
+    public static String translate(final String key, final Function<String, String> translator, final Object[] args) {
         StringBuilder out = new StringBuilder();
 
         String translated = fillTranslations(key, translator);
