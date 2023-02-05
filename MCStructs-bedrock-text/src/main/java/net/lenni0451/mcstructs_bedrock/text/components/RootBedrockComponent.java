@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class RootBedrockComponent extends ABedrockComponent {
 
@@ -39,6 +40,21 @@ public class RootBedrockComponent extends ABedrockComponent {
      */
     public RootBedrockComponent addComponent(final ABedrockComponent component) {
         this.components.add(component);
+        return this;
+    }
+
+    /**
+     * Iterate over all components and their siblings.
+     *
+     * @param consumer The consumer that will be called for every component
+     * @return This component
+     */
+    public RootBedrockComponent forEach(final Consumer<ABedrockComponent> consumer) {
+        consumer.accept(this);
+        for (ABedrockComponent component : this.components) {
+            if (component instanceof RootBedrockComponent) ((RootBedrockComponent) component).forEach(consumer);
+            else consumer.accept(component);
+        }
         return this;
     }
 
