@@ -28,7 +28,8 @@ public class BedrockTranslator {
      * To insert a {@code %} sign into the message, you have to escape it with another {@code %} sign.<br>
      * All {@code $d} and {@code $s} will be removed from the translated string.<br>
      * {@code %d}, {@code %s} and {@code %[1-9]} will be replaced with the given arguments.<br>
-     * When specifying a number, the argument of the given index will be used. The index starts at 1 and is offset by the number of {@code %s} and {@code %d} in the key.
+     * When specifying a number, the argument of the given index will be used. The index starts at 1 and is offset by the number of {@code %s} and {@code %d} in the key.<br>
+     * Translation arguments can also be translated when starting with a {@code %} sign.
      *
      * @param key        The key to translate
      * @param translator The translator function
