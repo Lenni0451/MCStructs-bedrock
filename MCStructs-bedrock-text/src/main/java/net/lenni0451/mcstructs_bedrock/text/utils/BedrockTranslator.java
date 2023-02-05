@@ -37,21 +37,25 @@ public class BedrockTranslator {
 
         String translated = fillTranslations(key, translator);
         translated = replaceDollar(translated);
-        Matcher matcher = ARGS_PATTERN.matcher(translated);
-        int argIndex = 0;
-        int numArgOffset = countSArgs(translated);
-        int start = 0;
-        while (matcher.find()) {
-            int matchStart = matcher.start();
-            int matchEnd = matcher.end();
-            if (matchStart > start) out.append(translated, start, matchStart);
-            start = matchEnd;
+        if (args.length != 0) {
+            Matcher matcher = ARGS_PATTERN.matcher(translated);
+            int argIndex = 0;
+            int numArgOffset = countSArgs(translated);
+            int start = 0;
+            while (matcher.find()) {
+                int matchStart = matcher.start();
+                int matchEnd = matcher.end();
+                if (matchStart > start) out.append(translated, start, matchStart);
+                start = matchEnd;
 
-            String match = matcher.group(1);
-            if (match.equals("d") || match.equals("s")) appendArg(out, getArg(args, argIndex++));
-            else appendArg(out, getArg(args, numArgOffset + Integer.parseInt(match) - 1));
+                String match = matcher.group(1);
+                if (match.equals("d") || match.equals("s")) appendArg(out, getArg(args, argIndex++));
+                else appendArg(out, getArg(args, numArgOffset + Integer.parseInt(match) - 1));
+            }
+            if (start < translated.length()) out.append(translated, start, translated.length());
+        } else {
+            out.append(translated);
         }
-        if (start < translated.length()) out.append(translated, start, translated.length());
         return out.toString();
     }
 
