@@ -41,14 +41,8 @@ public class BedrockTextDeserializer implements JsonDeserializer<ABedrockCompone
                 } else if (json.get("with").isJsonArray()) {
                     JsonArray with = json.getAsJsonArray("with");
                     for (JsonElement element : with) {
-                        if (element.isJsonObject()) {
-                            RootBedrockComponent root = (RootBedrockComponent) this.deserialize(element.getAsJsonObject(), RootBedrockComponent.class, context);
-                            args.addAll(root.getComponents());
-                        } else if (element.isJsonPrimitive()) {
-                            args.add(element.getAsString());
-                        } else {
-                            throw new JsonParseException("Json element in with array is not an object or a primitive");
-                        }
+                        if (!element.isJsonPrimitive() && !element.getAsJsonPrimitive().isString()) continue;
+                        args.add(element.getAsString());
                     }
                 } else {
                     throw new JsonParseException("Json element with is not an object or an array");
