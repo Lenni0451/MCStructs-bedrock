@@ -11,10 +11,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BedrockTextDeserializer implements JsonDeserializer<ABedrockComponent> {
+public class BedrockTextDeserializer implements JsonDeserializer<RootBedrockComponent> {
 
     @Override
-    public ABedrockComponent deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public RootBedrockComponent deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         if (!json.isJsonObject()) throw new JsonParseException("Json element is not an object");
         JsonObject ob = json.getAsJsonObject();
         RootBedrockComponent root = new RootBedrockComponent();
@@ -31,7 +31,9 @@ public class BedrockTextDeserializer implements JsonDeserializer<ABedrockCompone
     }
 
     private ABedrockComponent deserialize(final JsonObject json, final JsonDeserializationContext context) {
-        if (json.has("translate")) {
+        if (json.has("rawtext")) {
+            return this.deserialize(json, RootBedrockComponent.class, context);
+        } else if (json.has("translate")) {
             String key = json.get("translate").getAsString();
             List<Object> args = new ArrayList<>();
             if (json.has("with")) {
