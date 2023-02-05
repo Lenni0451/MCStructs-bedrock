@@ -3,13 +3,15 @@ package net.lenni0451.mcstructs_bedrock.text.utils;
 import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.components.StringBedrockComponent;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BedrockTranslator {
 
-    private static final Pattern TRANSLATION_KEY_PATTERN = Pattern.compile("%%|%(?:([\\w._\\-]+)([^\\w._\\-]))?");
+    private static final Pattern TRANSLATION_KEY_PATTERN = Pattern.compile("%%|%(?:([\\w._\\-]+)([^\\w._\\-]|$))?");
     private static final Pattern DOLLAR_REPLACE = Pattern.compile("\\$[ds]");
     private static final Pattern S_ARGS_PATTERN = Pattern.compile("%[ds]");
     private static final Pattern ARGS_PATTERN = Pattern.compile("%([ds\\d])");
@@ -31,12 +33,14 @@ public class BedrockTranslator {
      * @param key        The key to translate
      * @param translator The translator function
      * @param args       The arguments to insert
+     * @param options    The translator options
      * @return The translated string
      */
-    public static String translate(final String key, final Function<String, String> translator, final Object[] args) {
+    public static String translate(final String key, final Function<String, String> translator, final Object[] args, final TranslatorOptions... options) {
+        List<TranslatorOptions> enabledOptions = Arrays.asList(options);
         StringBuilder out = new StringBuilder();
 
-        String translated = fillTranslations(key, translator);
+        String translated = fillTranslations(key, translator, enabledOptions);
         translated = replaceDollar(translated);
         if (args.length != 0) {
             Matcher matcher = ARGS_PATTERN.matcher(translated);
@@ -50,8 +54,8 @@ public class BedrockTranslator {
                 start = matchEnd;
 
                 String match = matcher.group(1);
-                if (match.equals("d") || match.equals("s")) out.append(getArg(args, translator, argIndex++));
-                else out.append(getArg(args, translator, numArgOffset + Integer.parseInt(match) - 1));
+                if (match.equals("d") || match.equals("s")) out.append(getArg(args, translator, enabledOptions, argIndex++));
+                else out.append(getArg(args, translator, enabledOptions, numArgOffset + Integer.parseInt(match) - 1));
             }
             if (start < translated.length()) out.append(translated, start, translated.length());
         } else {
@@ -60,7 +64,7 @@ public class BedrockTranslator {
         return out.toString();
     }
 
-    private static String fillTranslations(final String s, final Function<String, String> translator) {
+    private static String fillTranslations(final String s, final Function<String, String> translator, final List<TranslatorOptions> enabledOptions) {
         StringBuilder out = new StringBuilder();
         Matcher matcher = TRANSLATION_KEY_PATTERN.matcher(s);
         int start = 0;
@@ -82,7 +86,7 @@ public class BedrockTranslator {
                 }
             }
         }
-        if (start == 0) out.append(translator.apply(s));
+        if (start == 0 && !enabledOptions.contains(TranslatorOptions.REQUIRE_PERCENT)) out.append(translator.apply(s));
         else if (start < s.length()) out.append(s, start, s.length());
         return out.toString();
     }
@@ -98,15 +102,16 @@ public class BedrockTranslator {
         return count;
     }
 
-    private static String getArg(final Object[] args, final Function<String, String> translator, final int index) {
+    private static String getArg(final Object[] args, final Function<String, String> translator, final List<TranslatorOptions> enabledOptions, final int index) {
         if (index < 0 || index >= args.length) return "";
+        boolean skipTranslation = enabledOptions.contains(TranslatorOptions.SKIP_ARGS_TRANSLATION);
         Object arg = args[index];
         if (arg instanceof String) {
             String s = (String) arg;
-            if (s.startsWith("%")) return translator.apply(s.substring(1));
+            if (s.startsWith("%") && !skipTranslation) return translator.apply(s.substring(1));
         } else if (arg instanceof StringBedrockComponent) {
             StringBedrockComponent component = (StringBedrockComponent) arg;
-            if (component.getText().startsWith("%")) return translator.apply(component.getText().substring(1));
+            if (component.getText().startsWith("%") && !skipTranslation) return translator.apply(component.getText().substring(1));
             else return component.asString();
         } else if (arg instanceof ABedrockComponent) {
             return ((ABedrockComponent) arg).asString();
