@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.JsonReader;
 import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.components.RootBedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.serializer.impl.BedrockTextDeserializer;
 import net.lenni0451.mcstructs_bedrock.text.serializer.impl.BedrockTextSerializer;
 
@@ -19,7 +20,7 @@ public class BedrockComponentSerializer {
 
     private static final Gson GSON = new GsonBuilder()
             .registerTypeHierarchyAdapter(ABedrockComponent.class, new BedrockTextSerializer())
-            .registerTypeHierarchyAdapter(ABedrockComponent.class, new BedrockTextDeserializer())
+            .registerTypeAdapter(RootBedrockComponent.class, new BedrockTextDeserializer())
             .create();
 
     /**
@@ -48,8 +49,8 @@ public class BedrockComponentSerializer {
      * @param json The json string
      * @return The deserialized bedrock component
      */
-    public static ABedrockComponent deserialize(final String json) {
-        return GSON.fromJson(json, ABedrockComponent.class);
+    public static RootBedrockComponent deserialize(final String json) {
+        return GSON.fromJson(json, RootBedrockComponent.class);
     }
 
     /**
@@ -58,8 +59,8 @@ public class BedrockComponentSerializer {
      * @param element The json element
      * @return The deserialized bedrock component
      */
-    public static ABedrockComponent deserialize(final JsonElement element) {
-        return GSON.fromJson(element, ABedrockComponent.class);
+    public static RootBedrockComponent deserialize(final JsonElement element) {
+        return GSON.fromJson(element, RootBedrockComponent.class);
     }
 
     /**
@@ -69,7 +70,7 @@ public class BedrockComponentSerializer {
      * @param json The json string
      * @return The deserialized bedrock component
      */
-    public static ABedrockComponent deserializeReader(final String json) {
+    public static RootBedrockComponent deserializeReader(final String json) {
         return deserializeReader(json, false);
     }
 
@@ -80,7 +81,7 @@ public class BedrockComponentSerializer {
      * @param json The json string
      * @return The deserialized bedrock component
      */
-    public static ABedrockComponent deserializeLenientReader(final String json) {
+    public static RootBedrockComponent deserializeLenientReader(final String json) {
         return deserializeReader(json, true);
     }
 
@@ -92,11 +93,11 @@ public class BedrockComponentSerializer {
      * @param lenient The lenient value
      * @return The deserialized bedrock component
      */
-    public static ABedrockComponent deserializeReader(final String json, final boolean lenient) {
+    public static RootBedrockComponent deserializeReader(final String json, final boolean lenient) {
         try {
             JsonReader reader = new JsonReader(new StringReader(json));
             reader.setLenient(lenient);
-            return GSON.getAdapter(ABedrockComponent.class).read(reader);
+            return GSON.getAdapter(RootBedrockComponent.class).read(reader);
         } catch (IOException e) {
             throw new JsonParseException("Failed to parse json", e);
         }
