@@ -9,6 +9,10 @@ public enum TranslatorOptions {
     /**
      * Require a % sign before a translation key.
      */
-    REQUIRE_PERCENT
+    REQUIRE_PERCENT,
+    /**
+     * Ignore % signs the beginning of the translation key.
+     */
+    IGNORE_STARTING_PERCENT;
 
 }

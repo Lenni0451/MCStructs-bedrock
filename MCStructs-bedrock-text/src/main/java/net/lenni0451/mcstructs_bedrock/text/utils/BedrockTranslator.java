@@ -65,7 +65,8 @@ public class BedrockTranslator {
         return out.toString();
     }
 
-    private static String fillTranslations(final String s, final Function<String, String> translator, final List<TranslatorOptions> enabledOptions) {
+    private static String fillTranslations(String s, final Function<String, String> translator, final List<TranslatorOptions> enabledOptions) {
+        if (enabledOptions.contains(TranslatorOptions.IGNORE_STARTING_PERCENT) && s.startsWith("%")) s = "%" + s;
         StringBuilder out = new StringBuilder();
         Matcher matcher = TRANSLATION_KEY_PATTERN.matcher(s);
         int start = 0;
