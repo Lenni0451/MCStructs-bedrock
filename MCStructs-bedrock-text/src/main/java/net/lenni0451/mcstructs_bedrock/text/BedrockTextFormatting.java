@@ -198,6 +198,13 @@ public enum BedrockTextFormatting {
         return this.rgbValue;
     }
 
+    /**
+     * @return The formatting as a string (e.g. "§c")
+     */
+    public String asString() {
+        return "§" + this.code;
+    }
+
 
     private enum Type {
         COLOR, FORMATTING
