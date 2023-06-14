@@ -102,20 +102,34 @@ public class BedrockTextUtils {
         private LegacyStyle() {
         }
 
+        /**
+         * Set the color of the style.
+         *
+         * @param color The color to set
+         */
         public void setColor(@Nullable final BedrockTextFormatting color) {
             this.color = color;
         }
 
+        /**
+         * @return The color of the style
+         */
         @Nullable
         public BedrockTextFormatting getColor() {
             return this.color;
         }
 
+        /**
+         * @return The styles of the style
+         */
         @Nonnull
         public Set<BedrockTextFormatting> getStyles() {
             return this.styles;
         }
 
+        /**
+         * @return The legacy string of the style (e.g. §4§l)
+         */
         public String toLegacy() {
             StringBuilder out = new StringBuilder();
             if (this.color != null) out.append(this.color.asString());
