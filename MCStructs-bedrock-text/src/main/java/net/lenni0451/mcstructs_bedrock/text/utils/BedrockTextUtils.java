@@ -54,7 +54,6 @@ public class BedrockTextUtils {
                         legacyStyle.getStyles().clear();
                     } else if (formatting.isColor()) {
                         legacyStyle.setColor(formatting);
-                        legacyStyle.getStyles().clear();
                     } else {
                         legacyStyle.getStyles().add(formatting);
                     }

@@ -38,10 +38,10 @@ class BedrockTextUtilsTest {
         assertEquals("§4§kWorld", parts[1]);
         assertEquals("§4§kTest", parts[2]);
 
-        parts = BedrockTextUtils.split("§4§k§bHi\nWorld\nTest", "\n");
+        parts = BedrockTextUtils.split("§4§k§bHi\nWorld§r§b\nTest", "\n");
         assertEquals(3, parts.length);
         assertEquals("§4§k§bHi", parts[0]);
-        assertEquals("§bWorld", parts[1]);
+        assertEquals("§b§kWorld§r§b", parts[1]);
         assertEquals("§bTest", parts[2]);
 
         parts = BedrockTextUtils.split("§4Hello\n§eWorld\n§lTest\n3", "\n");
