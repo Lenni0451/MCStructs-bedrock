@@ -2,12 +2,23 @@ package net.lenni0451.mcstructs_bedrock.forms.types;
 
 import net.lenni0451.mcstructs_bedrock.forms.AForm;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
+import net.lenni0451.mcstructs_bedrock.forms.types.builder.ModalFormBuilder;
+
+import javax.annotation.Nonnull;
 
 /**
  * Representation of a modal form.<br>
  * A modal form has two buttons and a text.
  */
 public class ModalForm extends AForm {
+
+    /**
+     * @return A new builder for a modal form
+     */
+    public static ModalFormBuilder builder() {
+        return new ModalFormBuilder();
+    }
+
 
     private final String text;
     private final String button1;
@@ -19,7 +30,7 @@ public class ModalForm extends AForm {
      * @param button1 The text of the first button
      * @param button2 The text of the second button
      */
-    public ModalForm(final String title, final String text, final String button1, final String button2) {
+    public ModalForm(@Nonnull final String title, @Nonnull final String text, @Nonnull final String button1, @Nonnull final String button2) {
         super(FormType.MODAL, title);
         this.text = text;
         this.button1 = button1;
@@ -29,6 +40,7 @@ public class ModalForm extends AForm {
     /**
      * @return The content of the form
      */
+    @Nonnull
     public String getText() {
         return this.text;
     }
@@ -36,6 +48,7 @@ public class ModalForm extends AForm {
     /**
      * @return The text of the first button
      */
+    @Nonnull
     public String getButton1() {
         return this.button1;
     }
@@ -43,6 +56,7 @@ public class ModalForm extends AForm {
     /**
      * @return The text of the second button
      */
+    @Nonnull
     public String getButton2() {
         return this.button2;
     }

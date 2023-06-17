@@ -3,7 +3,9 @@ package net.lenni0451.mcstructs_bedrock.forms.types;
 import net.lenni0451.mcstructs_bedrock.forms.AForm;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
 import net.lenni0451.mcstructs_bedrock.forms.elements.FormImage;
+import net.lenni0451.mcstructs_bedrock.forms.types.builder.ActionFormBuilder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -11,6 +13,14 @@ import javax.annotation.Nullable;
  * An action form has multiple buttons and a text.
  */
 public class ActionForm extends AForm {
+
+    /**
+     * @return A new builder for an action form
+     */
+    public static ActionFormBuilder builder() {
+        return new ActionFormBuilder();
+    }
+
 
     private final String text;
     private final Button[] buttons;
@@ -20,7 +30,7 @@ public class ActionForm extends AForm {
      * @param text    The text displayed in the form
      * @param buttons The buttons of the form
      */
-    public ActionForm(final String title, final String text, final Button... buttons) {
+    public ActionForm(@Nonnull final String title, @Nonnull final String text, @Nonnull final Button... buttons) {
         super(FormType.ACTION, title);
         this.text = text;
         this.buttons = buttons;
@@ -29,6 +39,7 @@ public class ActionForm extends AForm {
     /**
      * @return The content of the form
      */
+    @Nonnull
     public String getText() {
         return this.text;
     }
@@ -36,6 +47,7 @@ public class ActionForm extends AForm {
     /**
      * @return The buttons of the form
      */
+    @Nonnull
     public Button[] getButtons() {
         return this.buttons;
     }
