@@ -37,7 +37,7 @@ public class FormImage {
         @Nullable
         public static Type byName(final String name) {
             for (Type type : Type.values()) {
-                if (type.name().equals(name)) return type;
+                if (type.getName().equals(name)) return type;
             }
             return null;
         }

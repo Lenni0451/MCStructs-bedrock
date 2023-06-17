@@ -50,24 +50,6 @@ public class JsonUtils {
     }
 
     /**
-     * Ensure the given JsonObject contains the given string elements.
-     *
-     * @param object The JsonObject to check
-     * @param names  The names of the elements
-     * @return The string values of the elements
-     * @throws JsonParseException If one of the elements is missing or not a string
-     */
-    public static String[] ensureContainsStrings(final JsonObject object, final String... names) throws JsonParseException {
-        ensureContains(object, names);
-        String[] strings = new String[names.length];
-        for (int i = 0; i < names.length; i++) {
-            if (!object.get(names[i]).isJsonPrimitive()) throw new JsonParseException(names[i] + " must be a string");
-            strings[i] = object.get(names[i]).getAsString();
-        }
-        return strings;
-    }
-
-    /**
      * Ensure the given JsonObject contains the given boolean element.
      *
      * @param object The JsonObject to check
@@ -135,6 +117,24 @@ public class JsonUtils {
         ensureContains(object, name);
         if (!object.get(name).isJsonArray()) throw new JsonParseException(name + " must be an array");
         return object.get(name).getAsJsonArray();
+    }
+
+    /**
+     * Ensure the given JsonObject contains the given string array element.
+     *
+     * @param object The JsonObject to check
+     * @param name   The name of the element
+     * @return The string array value of the element
+     * @throws JsonParseException If the element is missing or not a string array
+     */
+    public static String[] ensureContainsStringArray(final JsonObject object, final String name) throws JsonParseException {
+        JsonArray array = ensureContainsArray(object, name);
+        String[] strings = new String[array.size()];
+        for (int i = 0; i < array.size(); i++) {
+            if (!array.get(i).isJsonPrimitive()) throw new JsonParseException(name + " must be an array of strings");
+            strings[i] = array.get(i).getAsString();
+        }
+        return strings;
     }
 
 }

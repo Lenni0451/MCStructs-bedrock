@@ -37,7 +37,7 @@ public class ActionFormCodec implements JsonSerializer<ActionForm>, JsonDeserial
         JsonArray buttons = ensureContainsArray(ob, "buttons");
         ActionForm.Button[] buttonArray = new ActionForm.Button[buttons.size()];
         for (int i = 0; i < buttons.size(); i++) {
-            JsonObject buttonJson = ensureContainsObject(ensureRootObject(buttons.get(i), "Button"), "Button");
+            JsonObject buttonJson = ensureRootObject(buttons.get(i), "Button");
             String text = ensureContainsString(buttonJson, "text");
             FormImage image = null;
             if (buttonJson.has("image")) image = context.deserialize(ensureContainsObject(buttonJson, "image"), FormImage.class);

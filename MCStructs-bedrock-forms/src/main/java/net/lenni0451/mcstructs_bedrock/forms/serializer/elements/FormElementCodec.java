@@ -70,10 +70,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 if (ob.has("default")) {
                     return new DropdownFormElement(text,
                             ensureContainsInt(ob, "default"),
-                            ensureContainsStrings(ob, "options"));
+                            ensureContainsStringArray(ob, "options"));
                 } else {
                     return new DropdownFormElement(text,
-                            ensureContainsStrings(ob, "options"));
+                            ensureContainsStringArray(ob, "options"));
                 }
             case SLIDER:
                 if (ob.has("default")) {
@@ -92,10 +92,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 if (ob.has("default")) {
                     return new StepSliderFormElement(text,
                             ensureContainsInt(ob, "default"),
-                            ensureContainsStrings(ob, "steps"));
+                            ensureContainsStringArray(ob, "steps"));
                 } else {
                     return new StepSliderFormElement(text,
-                            ensureContainsStrings(ob, "steps"));
+                            ensureContainsStringArray(ob, "steps"));
                 }
             case TEXT_FIELD:
                 if (ob.has("default")) {
