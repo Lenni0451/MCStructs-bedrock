@@ -12,15 +12,24 @@ public class FormImage {
         this.value = value;
     }
 
+    /**
+     * @return The type of the image
+     */
     public Type getType() {
         return this.type;
     }
 
+    /**
+     * @return The value of the image
+     */
     public String getValue() {
         return this.value;
     }
 
 
+    /**
+     * The type of an image.
+     */
     public enum Type {
         PATH("path"),
         URL("url");
@@ -40,6 +49,9 @@ public class FormImage {
             this.name = name;
         }
 
+        /**
+         * @return The name of the type
+         */
         public String getName() {
             return this.name;
         }
