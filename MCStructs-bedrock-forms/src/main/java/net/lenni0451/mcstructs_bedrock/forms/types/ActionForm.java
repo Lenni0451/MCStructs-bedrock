@@ -49,6 +49,10 @@ public class ActionForm extends AForm {
         private final String text;
         private final FormImage image;
 
+        public Button(final String text) {
+            this(text, null);
+        }
+
         public Button(final String text, @Nullable final FormImage image) {
             this.text = text;
             this.image = image;

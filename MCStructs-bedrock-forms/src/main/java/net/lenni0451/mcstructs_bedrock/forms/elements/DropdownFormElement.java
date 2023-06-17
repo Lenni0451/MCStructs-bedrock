@@ -48,7 +48,7 @@ public class DropdownFormElement extends AFormElement {
      *
      * @param selected The new selected option
      */
-    public void setSelected(int selected) {
+    public void setSelected(final int selected) {
         this.selected = selected;
     }
 

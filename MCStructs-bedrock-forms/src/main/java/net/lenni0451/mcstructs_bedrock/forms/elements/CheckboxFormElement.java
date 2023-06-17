@@ -39,7 +39,7 @@ public class CheckboxFormElement extends AFormElement {
      *
      * @param checked The new value
      */
-    public void setChecked(boolean checked) {
+    public void setChecked(final boolean checked) {
         this.checked = checked;
     }
 

@@ -48,7 +48,7 @@ public class StepSliderFormElement extends AFormElement {
      *
      * @param selected The new selected step
      */
-    public void setSelected(int selected) {
+    public void setSelected(final int selected) {
         this.selected = selected;
     }
 

@@ -9,15 +9,15 @@ public class SliderFormElement extends AFormElement {
 
     private final float min;
     private final float max;
-    private final int step;
+    private final float step;
     private final float defaultValue;
     private float current;
 
-    public SliderFormElement(final String text, final float min, final float max, final int step) {
+    public SliderFormElement(final String text, final float min, final float max, final float step) {
         this(text, min, max, step, min);
     }
 
-    public SliderFormElement(final String text, final float min, final float max, final int step, final float defaultValue) {
+    public SliderFormElement(final String text, final float min, final float max, final float step, final float defaultValue) {
         super(FormElementType.SLIDER, text);
         this.min = min;
         this.max = max;
@@ -43,7 +43,7 @@ public class SliderFormElement extends AFormElement {
     /**
      * @return The step of the slider
      */
-    public int getStep() {
+    public float getStep() {
         return this.step;
     }
 
@@ -66,7 +66,7 @@ public class SliderFormElement extends AFormElement {
      *
      * @param current The new value
      */
-    public void setCurrent(float current) {
+    public void setCurrent(final float current) {
         this.current = current;
     }
 

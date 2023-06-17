@@ -30,7 +30,7 @@ public enum FormType {
     private final Class<? extends AForm> type;
     private final String name;
 
-    FormType(Class<? extends AForm> type, String name) {
+    FormType(final Class<? extends AForm> type, final String name) {
         this.type = type;
         this.name = name;
     }

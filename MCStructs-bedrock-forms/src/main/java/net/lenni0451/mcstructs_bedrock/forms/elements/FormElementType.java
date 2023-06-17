@@ -29,7 +29,7 @@ public enum FormElementType {
     private final Class<? extends AFormElement> type;
     private final String name;
 
-    FormElementType(Class<? extends AFormElement> type, String name) {
+    FormElementType(final Class<? extends AFormElement> type, final String name) {
         this.type = type;
         this.name = name;
     }
