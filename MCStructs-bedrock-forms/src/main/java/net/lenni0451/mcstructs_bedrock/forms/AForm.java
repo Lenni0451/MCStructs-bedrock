@@ -24,4 +24,18 @@ public abstract class AForm {
         return this.title;
     }
 
+    /**
+     * Serialize the response of the form to a string.
+     *
+     * @return The serialized response
+     */
+    public abstract String serializeResponse();
+
+    /**
+     * Deserialize the response of the form from a string.
+     *
+     * @param response The serialized response
+     */
+    public abstract void deserializeResponse(final String response);
+
 }

@@ -24,6 +24,7 @@ public class ActionForm extends AForm {
 
     private final String text;
     private final Button[] buttons;
+    private int clickedButton;
 
     /**
      * @param title   The title of the form
@@ -50,6 +51,41 @@ public class ActionForm extends AForm {
     @Nonnull
     public Button[] getButtons() {
         return this.buttons;
+    }
+
+    /**
+     * Set the clicked button of the form.<br>
+     * This is required for the response.
+     *
+     * @param clickedButton The clicked button
+     */
+    public void setClickedButton(final int clickedButton) {
+        this.clickedButton = clickedButton;
+    }
+
+    /**
+     * Get the clicked button of the form.<br>
+     * This is required for the response.
+     *
+     * @return The clicked button
+     */
+    public int getClickedButton() {
+        return this.clickedButton;
+    }
+
+    @Override
+    public String serializeResponse() {
+        return String.valueOf(this.clickedButton);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws NumberFormatException If the response is not a number
+     */
+    @Override
+    public void deserializeResponse(String response) {
+        this.clickedButton = Integer.parseInt(response);
     }
 
 

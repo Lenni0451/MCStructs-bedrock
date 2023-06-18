@@ -1,5 +1,8 @@
 package net.lenni0451.mcstructs_bedrock.forms.types;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import net.lenni0451.mcstructs_bedrock.forms.AForm;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
 import net.lenni0451.mcstructs_bedrock.forms.elements.AFormElement;
@@ -44,6 +47,24 @@ public class CustomForm extends AForm {
     @Nonnull
     public AFormElement[] getElements() {
         return this.elements;
+    }
+
+    @Override
+    public String serializeResponse() {
+        JsonArray response = new JsonArray();
+        for (AFormElement element : this.elements) response.add(element.serialize());
+        return response.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws JsonParseException If the response is not a valid json array
+     */
+    @Override
+    public void deserializeResponse(String response) throws JsonParseException {
+        JsonArray responseArray = JsonParser.parseString(response).getAsJsonArray();
+        for (int i = 0; i < this.elements.length; i++) this.elements[i].deserialize(responseArray.get(i));
     }
 
 }

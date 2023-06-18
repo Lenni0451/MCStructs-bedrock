@@ -23,6 +23,7 @@ public class ModalForm extends AForm {
     private final String text;
     private final String button1;
     private final String button2;
+    private int clickedButton;
 
     /**
      * @param title   The title of the form
@@ -59,6 +60,36 @@ public class ModalForm extends AForm {
     @Nonnull
     public String getButton2() {
         return this.button2;
+    }
+
+    /**
+     * Set the clicked button of the form.<br>
+     * This is required for the response.
+     *
+     * @param clickedButton The clicked button
+     */
+    public void setClickedButton(final int clickedButton) {
+        this.clickedButton = clickedButton;
+    }
+
+    /**
+     * Get the clicked button of the form.<br>
+     * This is required for the response.
+     *
+     * @return The clicked button
+     */
+    public int getClickedButton() {
+        return this.clickedButton;
+    }
+
+    @Override
+    public String serializeResponse() {
+        return String.valueOf(this.clickedButton == 0);
+    }
+
+    @Override
+    public void deserializeResponse(String response) {
+        this.clickedButton = Boolean.parseBoolean(response) ? 0 : 1;
     }
 
 }

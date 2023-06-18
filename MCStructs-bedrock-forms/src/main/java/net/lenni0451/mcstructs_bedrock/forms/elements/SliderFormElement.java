@@ -1,6 +1,10 @@
 package net.lenni0451.mcstructs_bedrock.forms.elements;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import net.lenni0451.mcstructs_bedrock.forms.types.CustomForm;
+
+import javax.annotation.Nullable;
 
 /**
  * A slider form element for the {@link CustomForm}.
@@ -68,6 +72,17 @@ public class SliderFormElement extends AFormElement {
      */
     public void setCurrent(final float current) {
         this.current = current;
+    }
+
+    @Nullable
+    @Override
+    public JsonElement serialize() {
+        return GSON.toJsonTree(this.current);
+    }
+
+    @Override
+    public void deserialize(JsonElement element) throws JsonParseException {
+        this.current = element.getAsFloat();
     }
 
 }
