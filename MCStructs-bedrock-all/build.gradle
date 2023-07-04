@@ -1,4 +1,5 @@
 dependencies {
+    api project(":MCStructs-bedrock-forms")
     api project(":MCStructs-bedrock-nbt")
     api project(":MCStructs-bedrock-text")
 }
