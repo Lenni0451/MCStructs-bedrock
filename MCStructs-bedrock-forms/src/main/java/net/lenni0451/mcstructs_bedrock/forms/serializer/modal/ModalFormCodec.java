@@ -16,10 +16,10 @@ public class ModalFormCodec implements JsonSerializer<ModalForm>, JsonDeserializ
     @Override
     public JsonElement serialize(ModalForm src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject form = new JsonObject();
-        form.addProperty("title", src.getTitle());
-        form.addProperty("content", src.getText());
-        form.addProperty("button1", src.getButton1());
-        form.addProperty("button2", src.getButton2());
+        form.addProperty("title", src.getTitle(false));
+        form.addProperty("content", src.getText(false));
+        form.addProperty("button1", src.getButton1(false));
+        form.addProperty("button2", src.getButton2(false));
         return form;
     }
 

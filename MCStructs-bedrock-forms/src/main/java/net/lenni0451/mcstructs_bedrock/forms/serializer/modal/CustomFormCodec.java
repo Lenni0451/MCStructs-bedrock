@@ -16,7 +16,7 @@ public class CustomFormCodec implements JsonSerializer<CustomForm>, JsonDeserial
     @Override
     public JsonElement serialize(CustomForm src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject form = new JsonObject();
-        form.addProperty("title", src.getTitle());
+        form.addProperty("title", src.getTitle(false));
         JsonArray elements = new JsonArray();
         for (AFormElement element : src.getElements()) elements.add(context.serialize(element));
         form.add("content", elements);

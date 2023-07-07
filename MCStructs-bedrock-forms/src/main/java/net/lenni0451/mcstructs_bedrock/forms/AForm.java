@@ -1,9 +1,15 @@
 package net.lenni0451.mcstructs_bedrock.forms;
 
+import javax.annotation.Nonnull;
+import java.util.function.Function;
+
 public abstract class AForm {
+
+    public static final Function<String, String> DEFAULT_TRANSLATOR = s -> s;
 
     private final FormType type;
     private final String title;
+    protected Function<String, String> translator = DEFAULT_TRANSLATOR;
 
     public AForm(final FormType type, final String title) {
         this.type = type;
@@ -20,8 +26,26 @@ public abstract class AForm {
     /**
      * @return The title of the form
      */
-    public String getTitle() {
-        return this.title;
+    public String getTitle(final boolean translate) {
+        if (translate) return this.translator.apply(this.title);
+        else return this.title;
+    }
+
+    /**
+     * Set the translator for the form.
+     *
+     * @param translator The translator
+     */
+    public void setTranslator(@Nonnull final Function<String, String> translator) {
+        this.translator = translator;
+    }
+
+    /**
+     * @return The used translator
+     */
+    @Nonnull
+    public Function<String, String> getTranslator() {
+        return this.translator;
     }
 
     /**

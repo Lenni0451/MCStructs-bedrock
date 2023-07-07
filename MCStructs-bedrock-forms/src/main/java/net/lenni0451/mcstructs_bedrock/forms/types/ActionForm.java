@@ -7,6 +7,7 @@ import net.lenni0451.mcstructs_bedrock.forms.types.builder.ActionFormBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
 /**
  * Representation of an action form.<br>
@@ -37,12 +38,19 @@ public class ActionForm extends AForm {
         this.buttons = buttons;
     }
 
+    @Override
+    public void setTranslator(@Nonnull Function<String, String> translator) {
+        super.setTranslator(translator);
+        for (Button button : this.buttons) button.setTranslator(translator);
+    }
+
     /**
      * @return The content of the form
      */
     @Nonnull
-    public String getText() {
-        return this.text;
+    public String getText(final boolean translate) {
+        if (translate) return this.translator.apply(this.text);
+        else return this.text;
     }
 
     /**
@@ -96,6 +104,7 @@ public class ActionForm extends AForm {
     public static class Button {
         private final String text;
         private final FormImage image;
+        private Function<String, String> translator = AForm.DEFAULT_TRANSLATOR;
 
         public Button(final String text) {
             this(text, null);
@@ -109,8 +118,9 @@ public class ActionForm extends AForm {
         /**
          * @return The text of the button
          */
-        public String getText() {
-            return this.text;
+        public String getText(final boolean translate) {
+            if (translate) return this.translator.apply(this.text);
+            else return this.text;
         }
 
         /**
@@ -119,6 +129,22 @@ public class ActionForm extends AForm {
         @Nullable
         public FormImage getImage() {
             return this.image;
+        }
+
+        /**
+         * Set the translator for the button.
+         *
+         * @param translator The translator
+         */
+        public void setTranslator(final Function<String, String> translator) {
+            this.translator = translator;
+        }
+
+        /**
+         * @return The used translator
+         */
+        public Function<String, String> getTranslator() {
+            return this.translator;
         }
     }
 

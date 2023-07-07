@@ -36,8 +36,14 @@ public class StepSliderFormElement extends AFormElement {
     /**
      * @return The steps of the step slider
      */
-    public String[] getSteps() {
-        return this.steps;
+    public String[] getSteps(final boolean translate) {
+        if (translate) {
+            String[] translated = new String[this.steps.length];
+            for (int i = 0; i < this.steps.length; i++) translated[i] = this.translator.apply(this.steps[i]);
+            return translated;
+        } else {
+            return this.steps;
+        }
     }
 
     /**

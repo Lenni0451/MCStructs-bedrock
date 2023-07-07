@@ -16,12 +16,12 @@ public class ActionFormCodec implements JsonSerializer<ActionForm>, JsonDeserial
     @Override
     public JsonElement serialize(ActionForm src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject form = new JsonObject();
-        form.addProperty("title", src.getTitle());
-        form.addProperty("content", src.getText());
+        form.addProperty("title", src.getTitle(false));
+        form.addProperty("content", src.getText(false));
         JsonArray buttons = new JsonArray();
         for (ActionForm.Button button : src.getButtons()) {
             JsonObject buttonJson = new JsonObject();
-            buttonJson.addProperty("text", button.getText());
+            buttonJson.addProperty("text", button.getText(false));
             if (button.getImage() != null) buttonJson.add("image", context.serialize(button.getImage()));
             buttons.add(buttonJson);
         }

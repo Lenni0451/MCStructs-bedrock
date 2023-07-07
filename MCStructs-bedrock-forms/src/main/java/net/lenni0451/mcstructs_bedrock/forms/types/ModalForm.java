@@ -42,24 +42,27 @@ public class ModalForm extends AForm {
      * @return The content of the form
      */
     @Nonnull
-    public String getText() {
-        return this.text;
+    public String getText(final boolean translate) {
+        if (translate) return this.translator.apply(this.text);
+        else return this.text;
     }
 
     /**
      * @return The text of the first button
      */
     @Nonnull
-    public String getButton1() {
-        return this.button1;
+    public String getButton1(final boolean translate) {
+        if (translate) return this.translator.apply(this.button1);
+        else return this.button1;
     }
 
     /**
      * @return The text of the second button
      */
     @Nonnull
-    public String getButton2() {
-        return this.button2;
+    public String getButton2(final boolean translate) {
+        if (translate) return this.translator.apply(this.button2);
+        else return this.button2;
     }
 
     /**

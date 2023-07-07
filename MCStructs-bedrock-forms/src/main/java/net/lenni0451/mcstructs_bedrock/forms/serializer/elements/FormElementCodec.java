@@ -16,7 +16,7 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
     public JsonElement serialize(AFormElement src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject element = new JsonObject();
         element.addProperty("type", src.getType().getName());
-        element.addProperty("text", src.getText());
+        element.addProperty("text", src.getText(false));
         switch (src.getType()) {
             case CHECKBOX:
                 CheckboxFormElement checkbox = (CheckboxFormElement) src;
@@ -24,7 +24,7 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 break;
             case DROPDOWN:
                 DropdownFormElement dropdown = (DropdownFormElement) src;
-                element.add("options", context.serialize(dropdown.getOptions()));
+                element.add("options", context.serialize(dropdown.getOptions(false)));
                 element.addProperty("default", dropdown.getDefaultOption());
                 break;
             case SLIDER:
@@ -36,7 +36,7 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 break;
             case STEP_SLIDER:
                 StepSliderFormElement stepSlider = (StepSliderFormElement) src;
-                element.add("steps", context.serialize(stepSlider.getSteps()));
+                element.add("steps", context.serialize(stepSlider.getSteps(false)));
                 element.addProperty("default", stepSlider.getDefaultStep());
                 break;
             case TEXT_FIELD:

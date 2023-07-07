@@ -36,8 +36,14 @@ public class DropdownFormElement extends AFormElement {
     /**
      * @return The options of the dropdown
      */
-    public String[] getOptions() {
-        return this.options;
+    public String[] getOptions(final boolean translate) {
+        if (translate) {
+            String[] translated = new String[this.options.length];
+            for (int i = 0; i < this.options.length; i++) translated[i] = this.translator.apply(this.options[i]);
+            return translated;
+        } else {
+            return this.options;
+        }
     }
 
     /**
