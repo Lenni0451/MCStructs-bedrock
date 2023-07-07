@@ -24,6 +24,13 @@ public abstract class AForm {
     }
 
     /**
+     * @return The untranslated title of the form
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
      * Get the title of the form.
      *
      * @param translate If the title should be translated

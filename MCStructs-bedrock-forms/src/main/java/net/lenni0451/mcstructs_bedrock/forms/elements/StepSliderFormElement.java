@@ -34,6 +34,13 @@ public class StepSliderFormElement extends AFormElement {
     }
 
     /**
+     * @return The untranslated steps of the step slider
+     */
+    public String[] getSteps() {
+        return this.steps;
+    }
+
+    /**
      * Get the steps of the step slider.
      *
      * @param translate If the steps should be translated

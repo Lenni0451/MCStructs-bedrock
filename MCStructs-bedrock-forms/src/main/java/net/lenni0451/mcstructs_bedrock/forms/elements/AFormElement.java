@@ -29,6 +29,13 @@ public abstract class AFormElement {
     }
 
     /**
+     * @return The untranslated text of the element
+     */
+    public String getText() {
+        return this.text;
+    }
+
+    /**
      * Get the text of the element.
      *
      * @param translate If the text should be translated

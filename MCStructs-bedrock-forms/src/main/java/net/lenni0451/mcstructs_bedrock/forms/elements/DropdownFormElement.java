@@ -34,6 +34,13 @@ public class DropdownFormElement extends AFormElement {
     }
 
     /**
+     * @return The untranslated options of the dropdown
+     */
+    public String[] getOptions() {
+        return this.options;
+    }
+
+    /**
      * Get the options of the dropdown.
      *
      * @param translate If the options should be translated

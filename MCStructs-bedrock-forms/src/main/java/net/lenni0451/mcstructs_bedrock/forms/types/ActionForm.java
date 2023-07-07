@@ -45,6 +45,13 @@ public class ActionForm extends AForm {
     }
 
     /**
+     * @return The untranslated text of the form
+     */
+    public String getText() {
+        return this.text;
+    }
+
+    /**
      * Get the text of the form.
      *
      * @param translate If the text should be translated
@@ -116,6 +123,13 @@ public class ActionForm extends AForm {
         public Button(final String text, @Nullable final FormImage image) {
             this.text = text;
             this.image = image;
+        }
+
+        /**
+         * @return The untranslated text of the button
+         */
+        public String getText() {
+            return this.text;
         }
 
         /**
