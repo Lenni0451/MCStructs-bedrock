@@ -34,10 +34,10 @@ public class DropdownFormElement extends AFormElement {
     }
 
     /**
-     * @return The untranslated options of the dropdown
+     * @return The translated options of the dropdown
      */
     public String[] getOptions() {
-        return this.options;
+        return this.getOptions(true);
     }
 
     /**

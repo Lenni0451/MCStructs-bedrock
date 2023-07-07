@@ -29,10 +29,10 @@ public abstract class AFormElement {
     }
 
     /**
-     * @return The untranslated text of the element
+     * @return The translated text of the element
      */
     public String getText() {
-        return this.text;
+        return this.getText(true);
     }
 
     /**

@@ -45,10 +45,10 @@ public class ActionForm extends AForm {
     }
 
     /**
-     * @return The untranslated text of the form
+     * @return The translated text of the form
      */
     public String getText() {
-        return this.text;
+        return this.getText(true);
     }
 
     /**
@@ -126,10 +126,10 @@ public class ActionForm extends AForm {
         }
 
         /**
-         * @return The untranslated text of the button
+         * @return The translated text of the button
          */
         public String getText() {
-            return this.text;
+            return this.getText(true);
         }
 
         /**

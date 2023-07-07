@@ -39,10 +39,10 @@ public class ModalForm extends AForm {
     }
 
     /**
-     * @return The untranslated text of the form
+     * @return The translated text of the form
      */
     public String getText() {
-        return this.text;
+        return this.getText(true);
     }
 
     /**
@@ -58,11 +58,11 @@ public class ModalForm extends AForm {
     }
 
     /**
-     * @return The untranslated text of the first button
+     * @return The translated text of the first button
      */
     @Nonnull
     public String getButton1() {
-        return this.button1;
+        return this.getButton1(true);
     }
 
     /**
@@ -78,11 +78,11 @@ public class ModalForm extends AForm {
     }
 
     /**
-     * @return The untranslated text of the second button
+     * @return The translated text of the second button
      */
     @Nonnull
     public String getButton2() {
-        return this.button2;
+        return this.getButton2(true);
     }
 
     /**

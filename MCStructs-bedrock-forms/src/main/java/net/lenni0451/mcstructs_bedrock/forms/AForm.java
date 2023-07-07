@@ -24,10 +24,10 @@ public abstract class AForm {
     }
 
     /**
-     * @return The untranslated title of the form
+     * @return The translated title of the form
      */
     public String getTitle() {
-        return this.title;
+        return this.getTitle(true);
     }
 
     /**
