@@ -34,7 +34,10 @@ public class StepSliderFormElement extends AFormElement {
     }
 
     /**
-     * @return The steps of the step slider
+     * Get the steps of the step slider.
+     *
+     * @param translate If the steps should be translated
+     * @return The steps
      */
     public String[] getSteps(final boolean translate) {
         if (translate) {

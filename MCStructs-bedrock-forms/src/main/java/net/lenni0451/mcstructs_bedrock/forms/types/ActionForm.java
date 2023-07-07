@@ -45,7 +45,10 @@ public class ActionForm extends AForm {
     }
 
     /**
-     * @return The content of the form
+     * Get the text of the form.
+     *
+     * @param translate If the text should be translated
+     * @return The content
      */
     @Nonnull
     public String getText(final boolean translate) {
@@ -116,7 +119,10 @@ public class ActionForm extends AForm {
         }
 
         /**
-         * @return The text of the button
+         * Get the text of the button.
+         *
+         * @param translate If the text should be translated
+         * @return The text
          */
         public String getText(final boolean translate) {
             if (translate) return this.translator.apply(this.text);

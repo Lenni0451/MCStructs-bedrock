@@ -24,7 +24,10 @@ public abstract class AForm {
     }
 
     /**
-     * @return The title of the form
+     * Get the title of the form.
+     *
+     * @param translate If the title should be translated
+     * @return The title
      */
     public String getTitle(final boolean translate) {
         if (translate) return this.translator.apply(this.title);

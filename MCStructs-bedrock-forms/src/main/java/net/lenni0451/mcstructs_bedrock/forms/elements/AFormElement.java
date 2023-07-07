@@ -29,7 +29,10 @@ public abstract class AFormElement {
     }
 
     /**
-     * @return The text of the element
+     * Get the text of the element.
+     *
+     * @param translate If the text should be translated
+     * @return The text
      */
     public String getText(final boolean translate) {
         if (translate) return this.translator.apply(this.text);
