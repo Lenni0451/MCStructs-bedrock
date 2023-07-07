@@ -9,6 +9,7 @@ import net.lenni0451.mcstructs_bedrock.forms.elements.AFormElement;
 import net.lenni0451.mcstructs_bedrock.forms.types.builder.CustomFormBuilder;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
 
 /**
  * Representation of a custom form.<br>
@@ -39,6 +40,12 @@ public class CustomForm extends AForm {
     public CustomForm(@Nonnull final String title, final AFormElement... elements) {
         super(FormType.CUSTOM, title);
         this.elements = elements;
+    }
+
+    @Override
+    public void setTranslator(@Nonnull Function<String, String> translator) {
+        super.setTranslator(translator);
+        for (AFormElement element : this.elements) element.setTranslator(translator);
     }
 
     /**
