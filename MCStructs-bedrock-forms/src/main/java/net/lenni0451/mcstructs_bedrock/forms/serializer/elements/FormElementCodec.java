@@ -80,13 +80,13 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                     return new SliderFormElement(text,
                             ensureContainsFloat(ob, "min"),
                             ensureContainsFloat(ob, "max"),
-                            ensureContainsInt(ob, "step"),
+                            ensureContainsFloat(ob, "step"),
                             ensureContainsFloat(ob, "default"));
                 } else {
                     return new SliderFormElement(text,
                             ensureContainsFloat(ob, "min"),
                             ensureContainsFloat(ob, "max"),
-                            ensureContainsInt(ob, "step"));
+                            ensureContainsFloat(ob, "step"));
                 }
             case STEP_SLIDER:
                 if (ob.has("default")) {
