@@ -1,9 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.forms.serializer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import net.lenni0451.mcstructs_bedrock.forms.AForm;
 import net.lenni0451.mcstructs_bedrock.forms.elements.AFormElement;
@@ -21,6 +18,8 @@ public class FormSerializer {
             .registerTypeAdapter(FormImage.class, new FormImageCodec())
             .registerTypeHierarchyAdapter(AForm.class, new TypedFormCodec())
             .registerTypeHierarchyAdapter(AFormElement.class, new FormElementCodec())
+            .setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
+            .setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
             .create();
 
     /**
