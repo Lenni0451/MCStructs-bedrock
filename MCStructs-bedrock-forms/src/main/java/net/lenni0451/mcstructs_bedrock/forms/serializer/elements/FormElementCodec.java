@@ -60,14 +60,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
         String text = ensureContainsString(ob, "text");
         switch (type) {
             case CHECKBOX:
-                if (ob.has("default")) {
-                    return new CheckboxFormElement(text,
-                            ensureContainsBoolean(ob, "default"));
-                } else {
-                    return new CheckboxFormElement(text);
-                }
+                return new CheckboxFormElement(text,
+                        hasNonNull(ob, "default") && ensureContainsBoolean(ob, "default"));
             case DROPDOWN:
-                if (ob.has("default")) {
+                if (hasNonNull(ob, "default")) {
                     return new DropdownFormElement(text,
                             ensureContainsInt(ob, "default"),
                             ensureContainsStringArray(ob, "options"));
@@ -76,20 +72,20 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                             ensureContainsStringArray(ob, "options"));
                 }
             case SLIDER:
-                if (ob.has("default")) {
+                if (hasNonNull(ob, "default")) {
                     return new SliderFormElement(text,
                             ensureContainsFloat(ob, "min"),
                             ensureContainsFloat(ob, "max"),
-                            ensureContainsFloat(ob, "step"),
+                            hasNonNull(ob, "step") ? ensureContainsFloat(ob, "step") : 1,
                             ensureContainsFloat(ob, "default"));
                 } else {
                     return new SliderFormElement(text,
                             ensureContainsFloat(ob, "min"),
                             ensureContainsFloat(ob, "max"),
-                            ensureContainsFloat(ob, "step"));
+                            hasNonNull(ob, "step") ? ensureContainsFloat(ob, "step") : 1);
                 }
             case STEP_SLIDER:
-                if (ob.has("default")) {
+                if (hasNonNull(ob, "default")) {
                     return new StepSliderFormElement(text,
                             ensureContainsInt(ob, "default"),
                             ensureContainsStringArray(ob, "steps"));
@@ -98,14 +94,9 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                             ensureContainsStringArray(ob, "steps"));
                 }
             case TEXT_FIELD:
-                if (ob.has("default")) {
-                    return new TextFieldFormElement(text,
-                            ensureContainsString(ob, "placeholder"),
-                            ensureContainsString(ob, "default"));
-                } else {
-                    return new TextFieldFormElement(text,
-                            ensureContainsString(ob, "placeholder"));
-                }
+                return new TextFieldFormElement(text,
+                        hasNonNull(ob, "placeholder") ? ensureContainsString(ob, "placeholder") : "",
+                        hasNonNull(ob, "default") ? ensureContainsString(ob, "default") : "");
             case LABEL:
                 return new LabelFormElement(text);
             default:

@@ -8,6 +8,17 @@ import com.google.gson.JsonParseException;
 public class JsonUtils {
 
     /**
+     * Check if the given object has the given element and it is not null.
+     *
+     * @param ob   The object to check
+     * @param name The name of the element
+     * @return If the element is not null
+     */
+    public static boolean hasNonNull(final JsonObject ob, final String name) {
+        return ob.has(name) && !ob.get(name).isJsonNull();
+    }
+
+    /**
      * Ensure that the given element is a JsonObject.
      *
      * @param element The element to check

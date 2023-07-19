@@ -17,6 +17,7 @@ public class TextFieldFormElement extends AFormElement {
 
     public TextFieldFormElement(final String text, final String placeholder) {
         this(text, placeholder, null);
+        this.value = "";
     }
 
     public TextFieldFormElement(final String text, final String placeholder, final String defaultValue) {
