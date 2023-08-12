@@ -6,18 +6,25 @@ import net.lenni0451.mcstructs.nbt.io.NbtHeader;
 import net.lenni0451.mcstructs.nbt.io.types.INbtWriter;
 import net.lenni0451.mcstructs.nbt.tags.*;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Map;
 
+@ParametersAreNonnullByDefault
 public class BedrockNbtWriter implements INbtWriter {
+
+    @Override
+    public void writeType(DataOutput out, NbtType type) throws IOException {
+        out.writeByte(type.getId());
+    }
 
     @Override
     public void writeHeader(DataOutput out, NbtHeader header) throws IOException {
         if (header.isEnd()) {
-            out.writeByte(NbtType.END.getId());
+            this.writeType(out, NbtType.END);
         } else {
-            out.writeByte(header.getType().getId());
+            this.writeType(out, header.getType());
             BedrockWriteTypes.writeString(out, header.getName());
         }
     }
