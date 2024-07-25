@@ -2,27 +2,28 @@ subprojects {
     apply plugin: "java-library"
     apply plugin: "maven-publish"
     apply plugin: "signing"
+    apply plugin: "checkstyle"
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(8)
-    compileJava.options.encoding = compileTestJava.options.encoding = javadoc.options.encoding = "UTF-8"
+    base {
+        java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+        compileJava.options.encoding = compileTestJava.options.encoding = javadoc.options.encoding = "UTF-8"
 
-    archivesBaseName = "MCStructs-bedrock-" + project.maven_name
-    group = project.maven_group
-    version = project.maven_version
+        archivesName = "MCStructs-" + project.maven_name
+        group = project.maven_group ?: rootProject.maven_group
+        version = project.maven_version ?: rootProject.maven_version
+    }
 
     repositories {
         mavenCentral()
-        maven {
-            name = "lenni0451 releases"
-            url = "https://maven.lenni0451.net/releases"
-        }
     }
 
     dependencies {
         implementation "com.google.code.findbugs:jsr305:3.0.2"
 
-        testImplementation platform("org.junit:junit-bom:5.9.0")
+        testImplementation "com.google.code.findbugs:jsr305:3.0.2"
+        testImplementation(platform("org.junit:junit-bom:5.10.3"))
         testImplementation "org.junit.jupiter:junit-jupiter"
+        testRuntimeOnly "org.junit.platform:junit-platform-launcher"
     }
 
     java {
@@ -69,20 +70,20 @@ subprojects {
         }
         publications {
             maven(MavenPublication) {
-                artifactId = project.maven_name
-                groupId = project.maven_group
-                version = project.maven_version
+                artifactId = project.maven_name ?: rootProject.maven_name
+                groupId = rootProject.maven_group
+                version = rootProject.maven_version
 
                 from components.java
 
                 pom {
                     name = rootProject.name
-                    description = "A minecraft bedrock data structure library with the goal of being compliant with the vanilla client"
-                    url = "https://github.com/Lenni0451/MCStructs-bedrock"
+                    description = rootProject.maven_description
+                    url = "https://github.com/" + rootProject.github_repo
                     licenses {
                         license {
                             name = "MIT License"
-                            url = "https://github.com/Lenni0451/MCStructs-bedrock/blob/main/LICENSE"
+                            url = "https://github.com/" + rootProject.github_repo + "/blob/main/LICENSE"
                         }
                     }
                     developers {
@@ -91,16 +92,22 @@ subprojects {
                         }
                     }
                     scm {
-                        connection = "scm:git:git://github.com/Lenni0451/MCStructs-bedrock.git"
-                        developerConnection = "scm:git:ssh://github.com/Lenni0451/MCStructs-bedrock.git"
-                        url = "github.com/Lenni0451/MCStructs-bedrock"
+                        connection = "scm:git:git://github.com/" + rootProject.github_repo + ".git"
+                        developerConnection = "scm:git:ssh://github.com/" + rootProject.github_repo + ".git"
+                        url = "github.com/" + rootProject.github_repo
                     }
                 }
             }
         }
     }
 
+    checkstyle {
+        toolVersion = "9.3" //Latest version for Java 8: 9.3
+        configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+    }
+
     signing {
+        setRequired false
         sign configurations.archives
         sign publishing.publications.maven
     }
@@ -109,4 +116,5 @@ subprojects {
         it.dependsOn(project.tasks.withType(Sign))
     }
     build.dependsOn(test)
+    build.dependsOn(check)
 }
