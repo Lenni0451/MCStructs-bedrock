@@ -25,7 +25,7 @@ public class BedrockNbtReader implements INbtReader {
     public NbtType readType(DataInput in, NbtReadTracker readTracker) throws IOException {
         byte id = in.readByte();
         NbtType type = NbtType.byId(id);
-        if (type == null) throw new IOException("Unknown Nbt type: " + id);
+        if (type == null || type.equals(NbtType.LONG_ARRAY)) throw new IOException("Unknown Nbt type: " + id);
         return type;
     }
 
@@ -149,13 +149,8 @@ public class BedrockNbtReader implements INbtReader {
 
     @Nonnull
     @Override
-    public LongArrayTag readLongArray(DataInput in, NbtReadTracker readTracker) throws IOException {
-        readTracker.read(24);
-        int length = BedrockReadTypes.readVarInt(in);
-        readTracker.read(8 * length);
-        long[] value = new long[length];
-        for (int i = 0; i < value.length; i++) value[i] = BedrockReadTypes.readVarLong(in);
-        return new LongArrayTag(value);
+    public LongArrayTag readLongArray(DataInput in, NbtReadTracker readTracker) {
+        throw new UnsupportedOperationException("LongArrayTag is not supported in Bedrock Nbt");
     }
 
 }

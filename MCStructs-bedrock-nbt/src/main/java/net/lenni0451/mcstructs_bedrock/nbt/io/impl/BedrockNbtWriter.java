@@ -72,7 +72,7 @@ public class BedrockNbtWriter implements INbtWriter {
 
     @Override
     public void writeList(DataOutput out, ListTag<?> value) throws IOException {
-        if (value.getType() == null) out.writeByte(NbtType.END.getId());
+        if (value.getType() == null || value.isEmpty()) out.writeByte(NbtType.END.getId());
         else out.writeByte(value.getType().getId());
         BedrockWriteTypes.writeVarInt(out, value.size());
         for (INbtTag tag : value.getValue()) this.write(out, tag);
@@ -94,9 +94,8 @@ public class BedrockNbtWriter implements INbtWriter {
     }
 
     @Override
-    public void writeLongArray(DataOutput out, LongArrayTag value) throws IOException {
-        BedrockWriteTypes.writeVarInt(out, value.getLength());
-        for (long l : value.getValue()) out.writeLong(l);
+    public void writeLongArray(DataOutput out, LongArrayTag value) {
+        throw new UnsupportedOperationException("LongArrayTag is not supported in Bedrock Nbt");
     }
 
 }
