@@ -105,7 +105,8 @@ public class BedrockNbtReader implements INbtReader {
         readTracker.read(37);
         int typeId = in.readByte();
         int count = BedrockReadTypes.readVarInt(in);
-        if (typeId == NbtType.END.getId() && count > 0) throw new NbtReadException("ListNbt with type END and count > 0");
+        if (typeId == NbtType.END.getId() && count > 0) throw new NbtReadException("ListTag with type END and count > 0");
+        if (count < 0) throw new NbtReadException("ListTag with negative count");
         readTracker.read(4 * count);
         NbtType type = NbtType.byId(typeId);
         List<INbtTag> value = new ArrayList<>(Math.min(count, 512));
