@@ -27,7 +27,6 @@ class BedrockReadTypes {
         do {
             b = in.readByte();
             value |= (long) (b & 0b0111_1111) << (size++ * 7);
-            if (size > 10) throw new IOException("VarLong is too big");
         } while ((b & 0x80) != 0);
         return value;
     }
