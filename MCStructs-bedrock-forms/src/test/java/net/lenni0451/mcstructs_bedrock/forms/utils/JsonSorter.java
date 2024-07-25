@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * See <a href="https://github.com/Lenni0451/MCStructs/blob/1d91e09958070bc685c62c57de46ba97fa695c22/MCStructs-text/src/main/java/net/lenni0451/mcstructs/text/utils/JsonUtils.java#L188">MCStructs</a>
+ * @see <a href="https://github.com/Lenni0451/MCStructs/blob/1d91e09958070bc685c62c57de46ba97fa695c22/MCStructs-text/src/main/java/net/lenni0451/mcstructs/text/utils/JsonUtils.java#L188">MCStructs</a>
  */
 public class JsonSorter {
 

@@ -77,18 +77,18 @@ public class RootBedrockComponent extends ABedrockComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RootBedrockComponent that = (RootBedrockComponent) o;
-        return Objects.equals(components, that.components);
+        return Objects.equals(this.components, that.components);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(components);
+        return Objects.hash(this.components);
     }
 
     @Override
     public String toString() {
         return "RootBedrockComponent{" +
-                "components=" + components +
+                "components=" + this.components +
                 '}';
     }
 

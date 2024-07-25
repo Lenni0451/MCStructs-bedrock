@@ -27,13 +27,13 @@ public class TypedFormCodec implements JsonSerializer<AForm>, JsonDeserializer<A
         JsonObject form;
         switch (src.getType()) {
             case ACTION:
-                form = actionFormCodec.serialize((ActionForm) src, typeOfSrc, context).getAsJsonObject();
+                form = this.actionFormCodec.serialize((ActionForm) src, typeOfSrc, context).getAsJsonObject();
                 break;
             case MODAL:
-                form = modalFormCodec.serialize((ModalForm) src, typeOfSrc, context).getAsJsonObject();
+                form = this.modalFormCodec.serialize((ModalForm) src, typeOfSrc, context).getAsJsonObject();
                 break;
             case CUSTOM:
-                form = customFormCodec.serialize((CustomForm) src, typeOfSrc, context).getAsJsonObject();
+                form = this.customFormCodec.serialize((CustomForm) src, typeOfSrc, context).getAsJsonObject();
                 break;
             default:
                 throw new JsonParseException("Unknown form type: " + src.getType().getName());
@@ -49,11 +49,11 @@ public class TypedFormCodec implements JsonSerializer<AForm>, JsonDeserializer<A
         if (type == null) throw new JsonParseException("Unknown form type: " + ob.get("type").getAsString());
         switch (type) {
             case ACTION:
-                return actionFormCodec.deserialize(ob, typeOfT, context);
+                return this.actionFormCodec.deserialize(ob, typeOfT, context);
             case MODAL:
-                return modalFormCodec.deserialize(ob, typeOfT, context);
+                return this.modalFormCodec.deserialize(ob, typeOfT, context);
             case CUSTOM:
-                return customFormCodec.deserialize(ob, typeOfT, context);
+                return this.customFormCodec.deserialize(ob, typeOfT, context);
             default:
                 throw new JsonParseException("Unknown form type: " + type.getName());
         }

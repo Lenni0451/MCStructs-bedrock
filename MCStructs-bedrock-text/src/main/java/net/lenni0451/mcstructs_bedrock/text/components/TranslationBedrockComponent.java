@@ -51,7 +51,7 @@ public class TranslationBedrockComponent extends ABedrockComponent {
 
     @Override
     public String asString() {
-        return BedrockTranslator.translate(this.key, this.translator, args);
+        return BedrockTranslator.translate(this.key, this.translator, this.args);
     }
 
     @Override
@@ -72,22 +72,22 @@ public class TranslationBedrockComponent extends ABedrockComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TranslationBedrockComponent that = (TranslationBedrockComponent) o;
-        return Objects.equals(key, that.key) && Arrays.equals(args, that.args) && Objects.equals(translator, that.translator);
+        return Objects.equals(this.key, that.key) && Arrays.equals(this.args, that.args) && Objects.equals(this.translator, that.translator);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(key, translator);
-        result = 31 * result + Arrays.hashCode(args);
+        int result = Objects.hash(this.key, this.translator);
+        result = 31 * result + Arrays.hashCode(this.args);
         return result;
     }
 
     @Override
     public String toString() {
         return "TranslationBedrockComponent{" +
-                "key='" + key + '\'' +
-                ", args=" + Arrays.toString(args) +
-                ", translator=" + translator +
+                "key='" + this.key + '\'' +
+                ", args=" + Arrays.toString(this.args) +
+                ", translator=" + this.translator +
                 '}';
     }
 

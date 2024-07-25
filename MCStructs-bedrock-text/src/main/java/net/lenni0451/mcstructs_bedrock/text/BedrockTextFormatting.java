@@ -43,7 +43,7 @@ public enum BedrockTextFormatting {
     RESET("reset", 'r');
 
     /**
-     * All text formattings and colors-
+     * All text formattings and colors.
      */
     public static final Map<String, BedrockTextFormatting> ALL = new LinkedHashMap<>();
     /**

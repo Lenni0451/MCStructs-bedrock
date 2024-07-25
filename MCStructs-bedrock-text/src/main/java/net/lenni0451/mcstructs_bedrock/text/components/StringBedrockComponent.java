@@ -34,18 +34,18 @@ public class StringBedrockComponent extends ABedrockComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringBedrockComponent that = (StringBedrockComponent) o;
-        return Objects.equals(text, that.text);
+        return Objects.equals(this.text, that.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text);
+        return Objects.hash(this.text);
     }
 
     @Override
     public String toString() {
         return "StringBedrockComponent{" +
-                "text='" + text + '\'' +
+                "text='" + this.text + '\'' +
                 '}';
     }
 

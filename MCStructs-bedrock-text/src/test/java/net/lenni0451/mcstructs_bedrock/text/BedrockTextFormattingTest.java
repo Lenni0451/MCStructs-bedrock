@@ -17,8 +17,8 @@ class BedrockTextFormattingTest {
 
     @Test
     void getByName() {
-        for (BedrockTextFormatting BedrockTextFormatting : BedrockTextFormatting.ALL.values()) {
-            assertEquals(BedrockTextFormatting, BedrockTextFormatting.getByName(randomizeCase(BedrockTextFormatting)));
+        for (BedrockTextFormatting bedrockTextFormatting : BedrockTextFormatting.ALL.values()) {
+            assertEquals(bedrockTextFormatting, BedrockTextFormatting.getByName(randomizeCase(bedrockTextFormatting)));
         }
     }
 

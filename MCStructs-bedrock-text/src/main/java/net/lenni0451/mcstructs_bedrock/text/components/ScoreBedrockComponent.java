@@ -43,19 +43,19 @@ public class ScoreBedrockComponent extends ABedrockComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScoreBedrockComponent that = (ScoreBedrockComponent) o;
-        return Objects.equals(name, that.name) && Objects.equals(objective, that.objective);
+        return Objects.equals(this.name, that.name) && Objects.equals(this.objective, that.objective);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, objective);
+        return Objects.hash(this.name, this.objective);
     }
 
     @Override
     public String toString() {
         return "ScoreBedrockComponent{" +
-                "name='" + name + '\'' +
-                ", objective='" + objective + '\'' +
+                "name='" + this.name + '\'' +
+                ", objective='" + this.objective + '\'' +
                 '}';
     }
 

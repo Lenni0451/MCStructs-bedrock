@@ -34,18 +34,18 @@ public class SelectorBedrockComponent extends ABedrockComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SelectorBedrockComponent that = (SelectorBedrockComponent) o;
-        return Objects.equals(selector, that.selector);
+        return Objects.equals(this.selector, that.selector);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(selector);
+        return Objects.hash(this.selector);
     }
 
     @Override
     public String toString() {
         return "SelectorBedrockComponent{" +
-                "selector='" + selector + '\'' +
+                "selector='" + this.selector + '\'' +
                 '}';
     }
 
