@@ -36,6 +36,7 @@ public enum BedrockTextFormatting {
     MATERIAL_DIAMOND("material_diamond", 's', 0x2C_BA_A8),
     MATERIAL_LAPIS("material_lapis", 't', 0x21_49_7B),
     MATERIAL_AMETHYST("material_amethyst", 'u', 0x9A_5C_C6),
+    MATERIAL_RESIN("material_resin", 'v', 0xEA_71_13),
 
     OBFUSCATED("obfuscated", 'k'),
     BOLD("bold", 'l'),
