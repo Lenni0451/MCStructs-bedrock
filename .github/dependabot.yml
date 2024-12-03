@@ -8,3 +8,15 @@ updates:
     package-ecosystem: "gradle"
     schedule:
       interval: "daily"
+  - directory: "/MCStructs-bedrock-forms"
+    package-ecosystem: "gradle"
+    schedule:
+      interval: "daily"
+  - directory: "/MCStructs-bedrock-nbt"
+    package-ecosystem: "gradle"
+    schedule:
+      interval: "daily"
+  - directory: "/MCStructs-bedrock-text"
+    package-ecosystem: "gradle"
+    schedule:
+      interval: "daily"
