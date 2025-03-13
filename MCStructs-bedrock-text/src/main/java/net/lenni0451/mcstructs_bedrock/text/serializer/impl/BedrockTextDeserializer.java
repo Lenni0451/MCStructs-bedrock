@@ -2,10 +2,7 @@ package net.lenni0451.mcstructs_bedrock.text.serializer.impl;
 
 import com.google.gson.*;
 import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
-import net.lenni0451.mcstructs_bedrock.text.components.RootBedrockComponent;
-import net.lenni0451.mcstructs_bedrock.text.components.ScoreBedrockComponent;
-import net.lenni0451.mcstructs_bedrock.text.components.StringBedrockComponent;
-import net.lenni0451.mcstructs_bedrock.text.components.TranslationBedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.components.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -63,7 +60,7 @@ public class BedrockTextDeserializer implements JsonDeserializer<RootBedrockComp
             return new ScoreBedrockComponent(score.get("name").getAsString(), score.get("objective").getAsString());
         } else if (json.has("selector")) {
             if (!json.get("selector").isJsonPrimitive()) throw new JsonParseException("Json element selector is not a primitive");
-            return new StringBedrockComponent(json.get("selector").getAsString());
+            return new SelectorBedrockComponent(json.get("selector").getAsString());
         } else {
             throw new JsonParseException("Json object does not contain a translate, text, score or selector");
         }
