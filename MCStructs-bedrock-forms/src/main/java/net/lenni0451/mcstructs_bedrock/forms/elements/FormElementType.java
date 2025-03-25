@@ -9,7 +9,10 @@ public enum FormElementType {
     LABEL(LabelFormElement.class, "label"),
     SLIDER(SliderFormElement.class, "slider"),
     STEP_SLIDER(StepSliderFormElement.class, "step_slider"),
-    TEXT_FIELD(TextFieldFormElement.class, "input");
+    TEXT_FIELD(TextFieldFormElement.class, "input"),
+    DIVIDER(DividerFormElement.class, "divider"),
+    HEADER(HeaderFormElement.class, "header"),
+    ;
 
     /**
      * Get a form element type by its name.

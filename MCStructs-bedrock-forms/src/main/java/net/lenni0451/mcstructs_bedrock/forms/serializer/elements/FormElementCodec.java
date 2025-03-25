@@ -46,6 +46,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 break;
             case LABEL:
                 break;
+            case DIVIDER:
+                break;
+            case HEADER:
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + src.getType());
         }
@@ -99,6 +103,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                         hasNonNull(ob, "default") ? ensureContainsString(ob, "default") : "");
             case LABEL:
                 return new LabelFormElement(text);
+            case DIVIDER:
+                return new DividerFormElement();
+            case HEADER:
+                return new HeaderFormElement(text);
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
         }

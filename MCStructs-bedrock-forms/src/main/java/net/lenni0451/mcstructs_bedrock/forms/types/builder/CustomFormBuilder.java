@@ -162,6 +162,26 @@ public class CustomFormBuilder {
     }
 
     /**
+     * Add a divider to the form.
+     *
+     * @return The builder instance
+     */
+    public CustomFormBuilder divider() {
+        this.elements.add(new DividerFormElement());
+        return this;
+    }
+
+    /**
+     * Add a header to the form.
+     *
+     * @return The builder instance
+     */
+    public CustomFormBuilder header(@Nonnull final String text) {
+        this.elements.add(new HeaderFormElement(text));
+        return this;
+    }
+
+    /**
      * Build the custom form.
      *
      * @return The custom form
