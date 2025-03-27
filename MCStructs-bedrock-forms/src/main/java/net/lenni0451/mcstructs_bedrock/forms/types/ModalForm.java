@@ -1,6 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.forms.types;
 
-import net.lenni0451.mcstructs_bedrock.forms.AForm;
+import net.lenni0451.mcstructs_bedrock.forms.Form;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
 import net.lenni0451.mcstructs_bedrock.forms.types.builder.ModalFormBuilder;
 
@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
  * Representation of a modal form.<br>
  * A modal form has two buttons and a text.
  */
-public class ModalForm extends AForm {
+public class ModalForm extends Form {
 
     /**
      * @return A new builder for a modal form

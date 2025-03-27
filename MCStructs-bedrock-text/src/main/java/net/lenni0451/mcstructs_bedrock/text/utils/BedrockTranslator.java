@@ -1,6 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.text.utils;
 
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.components.StringBedrockComponent;
 
 import java.util.Arrays;
@@ -115,8 +115,8 @@ public class BedrockTranslator {
             StringBedrockComponent component = (StringBedrockComponent) arg;
             if (component.getText().startsWith("%") && !skipTranslation) return translator.apply(component.getText().substring(1));
             else return component.asString();
-        } else if (arg instanceof ABedrockComponent) {
-            return ((ABedrockComponent) arg).asString();
+        } else if (arg instanceof BedrockComponent) {
+            return ((BedrockComponent) arg).asString();
         }
         return arg.toString();
     }

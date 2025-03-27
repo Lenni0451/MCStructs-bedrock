@@ -2,8 +2,8 @@ package net.lenni0451.mcstructs_bedrock.forms.serializer;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import net.lenni0451.mcstructs_bedrock.forms.AForm;
-import net.lenni0451.mcstructs_bedrock.forms.elements.AFormElement;
+import net.lenni0451.mcstructs_bedrock.forms.Form;
+import net.lenni0451.mcstructs_bedrock.forms.elements.FormElement;
 import net.lenni0451.mcstructs_bedrock.forms.elements.FormImage;
 import net.lenni0451.mcstructs_bedrock.forms.serializer.elements.FormElementCodec;
 import net.lenni0451.mcstructs_bedrock.forms.serializer.elements.FormImageCodec;
@@ -16,8 +16,8 @@ public class FormSerializer {
 
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(FormImage.class, new FormImageCodec())
-            .registerTypeHierarchyAdapter(AForm.class, new TypedFormCodec())
-            .registerTypeHierarchyAdapter(AFormElement.class, new FormElementCodec())
+            .registerTypeHierarchyAdapter(Form.class, new TypedFormCodec())
+            .registerTypeHierarchyAdapter(FormElement.class, new FormElementCodec())
             .setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
             .setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
             .create();
@@ -28,7 +28,7 @@ public class FormSerializer {
      * @param form The form to serialize
      * @return The json string
      */
-    public static String serialize(final AForm form) {
+    public static String serialize(final Form form) {
         return GSON.toJson(form);
     }
 
@@ -38,7 +38,7 @@ public class FormSerializer {
      * @param form The form to serialize
      * @return The json element
      */
-    public static JsonElement serializeJson(final AForm form) {
+    public static JsonElement serializeJson(final Form form) {
         return GSON.toJsonTree(form);
     }
 
@@ -48,8 +48,8 @@ public class FormSerializer {
      * @param element The json string
      * @return The deserialized form
      */
-    public static AForm deserialize(final String element) {
-        return GSON.fromJson(element, AForm.class);
+    public static Form deserialize(final String element) {
+        return GSON.fromJson(element, Form.class);
     }
 
     /**
@@ -58,8 +58,8 @@ public class FormSerializer {
      * @param element The json string
      * @return The deserialized form
      */
-    public static AForm deserialize(final JsonElement element) {
-        return GSON.fromJson(element, AForm.class);
+    public static Form deserialize(final JsonElement element) {
+        return GSON.fromJson(element, Form.class);
     }
 
     /**
@@ -68,7 +68,7 @@ public class FormSerializer {
      * @param json The json string
      * @return The deserialized form
      */
-    public static AForm deserializeReader(final String json) {
+    public static Form deserializeReader(final String json) {
         return deserializeReader(json, false);
     }
 
@@ -78,7 +78,7 @@ public class FormSerializer {
      * @param json The json string
      * @return The deserialized form
      */
-    public static AForm deserializeLenientReader(final String json) {
+    public static Form deserializeLenientReader(final String json) {
         return deserializeReader(json, true);
     }
 
@@ -89,11 +89,11 @@ public class FormSerializer {
      * @param lenient Whether to use a lenient json reader
      * @return The deserialized form
      */
-    public static AForm deserializeReader(final String json, final boolean lenient) {
+    public static Form deserializeReader(final String json, final boolean lenient) {
         try {
             JsonReader reader = new JsonReader(new StringReader(json));
             reader.setLenient(lenient);
-            return GSON.getAdapter(AForm.class).read(reader);
+            return GSON.getAdapter(Form.class).read(reader);
         } catch (IOException e) {
             throw new JsonParseException("Failed to parse json", e);
         }

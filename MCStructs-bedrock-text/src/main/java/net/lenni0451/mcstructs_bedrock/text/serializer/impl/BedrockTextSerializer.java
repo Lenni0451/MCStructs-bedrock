@@ -1,19 +1,19 @@
 package net.lenni0451.mcstructs_bedrock.text.serializer.impl;
 
 import com.google.gson.*;
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.components.*;
 
 import java.lang.reflect.Type;
 
-public class BedrockTextSerializer implements JsonSerializer<ABedrockComponent> {
+public class BedrockTextSerializer implements JsonSerializer<BedrockComponent> {
 
     @Override
-    public JsonElement serialize(ABedrockComponent src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(BedrockComponent src, Type typeOfSrc, JsonSerializationContext context) {
         if (src instanceof RootBedrockComponent) {
             RootBedrockComponent root = (RootBedrockComponent) src;
             JsonArray rawtext = new JsonArray();
-            for (ABedrockComponent component : root.getComponents()) rawtext.add(this.serialize(component, component.getClass(), context));
+            for (BedrockComponent component : root.getComponents()) rawtext.add(this.serialize(component, component.getClass(), context));
 
             JsonObject serialized = new JsonObject();
             serialized.add("rawtext", rawtext);
@@ -27,7 +27,7 @@ public class BedrockTextSerializer implements JsonSerializer<ABedrockComponent> 
             TranslationBedrockComponent translation = (TranslationBedrockComponent) src;
             RootBedrockComponent with = new RootBedrockComponent();
             for (Object arg : translation.getArgs()) {
-                if (arg instanceof ABedrockComponent) with.addComponent((ABedrockComponent) arg);
+                if (arg instanceof BedrockComponent) with.addComponent((BedrockComponent) arg);
                 else with.addComponent(new StringBedrockComponent(arg.toString()));
             }
 

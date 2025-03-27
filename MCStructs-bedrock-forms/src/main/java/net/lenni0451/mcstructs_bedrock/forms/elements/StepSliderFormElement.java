@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A step slider form element for the {@link CustomForm}.
  */
-public class StepSliderFormElement extends AFormElement {
+public class StepSliderFormElement extends FormElement implements ModifiableFormElement {
 
     private final int defaultStep;
     private final String[] steps;

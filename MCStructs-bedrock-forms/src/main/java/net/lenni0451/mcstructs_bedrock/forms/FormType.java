@@ -27,15 +27,15 @@ public enum FormType {
     }
 
 
-    private final Class<? extends AForm> type;
+    private final Class<? extends Form> type;
     private final String name;
 
-    FormType(final Class<? extends AForm> type, final String name) {
+    FormType(final Class<? extends Form> type, final String name) {
         this.type = type;
         this.name = name;
     }
 
-    public Class<? extends AForm> getType() {
+    public Class<? extends Form> getType() {
         return this.type;
     }
 

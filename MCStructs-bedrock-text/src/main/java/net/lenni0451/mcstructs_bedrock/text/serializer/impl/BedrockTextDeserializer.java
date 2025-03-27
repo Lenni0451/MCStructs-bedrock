@@ -1,7 +1,7 @@
 package net.lenni0451.mcstructs_bedrock.text.serializer.impl;
 
 import com.google.gson.*;
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.components.*;
 
 import java.lang.reflect.Type;
@@ -27,7 +27,7 @@ public class BedrockTextDeserializer implements JsonDeserializer<RootBedrockComp
         return root;
     }
 
-    private ABedrockComponent deserialize(final JsonObject json, final JsonDeserializationContext context) {
+    private BedrockComponent deserialize(final JsonObject json, final JsonDeserializationContext context) {
         if (json.has("rawtext")) {
             return this.deserialize(json, RootBedrockComponent.class, context);
         } else if (json.has("translate")) {

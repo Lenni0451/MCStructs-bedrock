@@ -11,7 +11,7 @@ import net.lenni0451.mcstructs_bedrock.text.components.*;
  * - {@link ScoreBedrockComponent}<br>
  * - {@link SelectorBedrockComponent}
  */
-public abstract class ABedrockComponent {
+public abstract class BedrockComponent {
 
     /**
      * @return The string representation of this component
@@ -21,7 +21,7 @@ public abstract class ABedrockComponent {
     /**
      * @return A copy of this component
      */
-    public abstract ABedrockComponent copy();
+    public abstract BedrockComponent copy();
 
     public abstract boolean equals(final Object o);
 

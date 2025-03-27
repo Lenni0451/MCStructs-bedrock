@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A dropdown form element for the {@link CustomForm}.
  */
-public class DropdownFormElement extends AFormElement {
+public class DropdownFormElement extends FormElement implements ModifiableFormElement {
 
     private final int defaultOption;
     private final String[] options;

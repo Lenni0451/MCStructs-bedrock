@@ -10,7 +10,7 @@ import java.util.List;
 public class CustomFormBuilder {
 
     private String title;
-    private final List<AFormElement> elements = new ArrayList<>();
+    private final List<FormElement> elements = new ArrayList<>();
 
     /**
      * Set the title of the form.
@@ -174,6 +174,7 @@ public class CustomFormBuilder {
     /**
      * Add a header to the form.
      *
+     * @param text The text of the header
      * @return The builder instance
      */
     public CustomFormBuilder header(@Nonnull final String text) {
@@ -187,7 +188,7 @@ public class CustomFormBuilder {
      * @return The custom form
      */
     public CustomForm build() {
-        return new CustomForm(this.title, this.elements.toArray(new AFormElement[0]));
+        return new CustomForm(this.title, this.elements.toArray(new FormElement[0]));
     }
 
 }

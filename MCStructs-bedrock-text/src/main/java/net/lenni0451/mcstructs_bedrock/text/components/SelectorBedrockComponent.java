@@ -1,10 +1,10 @@
 package net.lenni0451.mcstructs_bedrock.text.components;
 
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 
 import java.util.Objects;
 
-public class SelectorBedrockComponent extends ABedrockComponent {
+public class SelectorBedrockComponent extends BedrockComponent {
 
     private final String selector;
 
@@ -25,7 +25,7 @@ public class SelectorBedrockComponent extends ABedrockComponent {
     }
 
     @Override
-    public ABedrockComponent copy() {
+    public BedrockComponent copy() {
         return new SelectorBedrockComponent(this.selector);
     }
 

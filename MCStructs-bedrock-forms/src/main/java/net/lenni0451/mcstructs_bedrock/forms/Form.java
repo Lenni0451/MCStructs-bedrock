@@ -3,7 +3,7 @@ package net.lenni0451.mcstructs_bedrock.forms;
 import javax.annotation.Nonnull;
 import java.util.function.Function;
 
-public abstract class AForm {
+public abstract class Form {
 
     public static final Function<String, String> DEFAULT_TRANSLATOR = s -> s;
 
@@ -11,7 +11,8 @@ public abstract class AForm {
     private final String title;
     protected Function<String, String> translator = DEFAULT_TRANSLATOR;
 
-    public AForm(final FormType type, final String title) {
+    public Form(final FormType type, final String title) {
+        if (title == null) throw new NullPointerException("The title of a form cannot be null");
         this.type = type;
         this.title = title;
     }

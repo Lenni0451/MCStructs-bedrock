@@ -10,7 +10,7 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class NbtIOTest {
+class BedrockNbtIOTest {
 
     private static byte[] rawTag;
     private static CompoundTag tag;
@@ -18,7 +18,7 @@ class NbtIOTest {
     @BeforeAll
     static void init() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        InputStream is = NbtIOTest.class.getClassLoader().getResourceAsStream("test.nbt");
+        InputStream is = BedrockNbtIOTest.class.getClassLoader().getResourceAsStream("test.nbt");
         byte[] buf = new byte[1024];
         int len;
         while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
@@ -46,15 +46,15 @@ class NbtIOTest {
     void write() {
         assertDoesNotThrow(() -> {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            NbtIO.BEDROCK.write(new DataOutputStream(baos), "", tag);
+            BedrockNbtIO.INSTANCE.write(new DataOutputStream(baos), "", tag);
             this.readTag(baos.toByteArray());
         });
     }
 
     private void readTag(final byte[] bytes) {
         assertDoesNotThrow(() -> {
-            CompoundTag tag = (CompoundTag) NbtIO.BEDROCK.read(new DataInputStream(new ByteArrayInputStream(bytes)), NbtReadTracker.unlimited());
-            assertEquals(NbtIOTest.tag, tag);
+            CompoundTag tag = (CompoundTag) BedrockNbtIO.INSTANCE.read(new DataInputStream(new ByteArrayInputStream(bytes)), NbtReadTracker.unlimitedDepth());
+            assertEquals(BedrockNbtIOTest.tag, tag);
         });
     }
 

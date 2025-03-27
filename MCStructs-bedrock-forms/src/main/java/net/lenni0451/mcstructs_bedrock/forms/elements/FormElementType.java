@@ -12,6 +12,7 @@ public enum FormElementType {
     TEXT_FIELD(TextFieldFormElement.class, "input"),
     DIVIDER(DividerFormElement.class, "divider"),
     HEADER(HeaderFormElement.class, "header"),
+    BUTTON(ButtonFormElement.class, "button"),
     ;
 
     /**
@@ -29,10 +30,10 @@ public enum FormElementType {
     }
 
 
-    private final Class<? extends AFormElement> type;
+    private final Class<? extends FormElement> type;
     private final String name;
 
-    FormElementType(final Class<? extends AFormElement> type, final String name) {
+    FormElementType(final Class<? extends FormElement> type, final String name) {
         this.type = type;
         this.name = name;
     }
@@ -40,7 +41,7 @@ public enum FormElementType {
     /**
      * @return The type of the element
      */
-    public Class<? extends AFormElement> getType() {
+    public Class<? extends FormElement> getType() {
         return this.type;
     }
 

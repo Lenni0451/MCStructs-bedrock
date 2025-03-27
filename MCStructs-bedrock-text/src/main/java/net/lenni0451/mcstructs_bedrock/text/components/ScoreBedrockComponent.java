@@ -1,10 +1,10 @@
 package net.lenni0451.mcstructs_bedrock.text.components;
 
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 
 import java.util.Objects;
 
-public class ScoreBedrockComponent extends ABedrockComponent {
+public class ScoreBedrockComponent extends BedrockComponent {
 
     private final String name;
     private final String objective;
@@ -34,7 +34,7 @@ public class ScoreBedrockComponent extends ABedrockComponent {
     }
 
     @Override
-    public ABedrockComponent copy() {
+    public BedrockComponent copy() {
         return new ScoreBedrockComponent(this.name, this.objective);
     }
 

@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A checkbox form element for the {@link CustomForm}.
  */
-public class CheckboxFormElement extends AFormElement {
+public class CheckboxFormElement extends FormElement implements ModifiableFormElement {
 
     private final boolean defaultValue;
     private boolean checked;

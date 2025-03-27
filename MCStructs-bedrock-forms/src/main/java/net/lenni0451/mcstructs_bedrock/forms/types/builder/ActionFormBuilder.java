@@ -1,6 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.forms.types.builder;
 
-import net.lenni0451.mcstructs_bedrock.forms.elements.FormImage;
+import net.lenni0451.mcstructs_bedrock.forms.elements.*;
 import net.lenni0451.mcstructs_bedrock.forms.types.ActionForm;
 
 import javax.annotation.Nonnull;
@@ -12,7 +12,7 @@ public class ActionFormBuilder {
 
     private String title;
     private String text;
-    private final List<ActionForm.Button> buttons = new ArrayList<>();
+    private final List<FormElement> elements = new ArrayList<>();
 
     /**
      * Set the title of the form.
@@ -37,13 +37,35 @@ public class ActionFormBuilder {
     }
 
     /**
+     * Add a label to the form.
+     *
+     * @param text The text of the label
+     * @return The builder instance
+     */
+    public ActionFormBuilder label(@Nonnull final String text) {
+        this.elements.add(new LabelFormElement(text));
+        return this;
+    }
+
+    /**
+     * Add a header to the form.
+     *
+     * @param text The text of the header
+     * @return The builder instance
+     */
+    public ActionFormBuilder header(@Nonnull final String text) {
+        this.elements.add(new HeaderFormElement(text));
+        return this;
+    }
+
+    /**
      * Add a button to the form.
      *
      * @param text The text of the button
      * @return The builder instance
      */
     public ActionFormBuilder button(@Nonnull final String text) {
-        this.buttons.add(new ActionForm.Button(text));
+        this.elements.add(new ButtonFormElement(text));
         return this;
     }
 
@@ -55,7 +77,7 @@ public class ActionFormBuilder {
      * @return The builder instance
      */
     public ActionFormBuilder button(@Nonnull final String text, @Nullable final FormImage image) {
-        this.buttons.add(new ActionForm.Button(text, image));
+        this.elements.add(new ButtonFormElement(text, image));
         return this;
     }
 
@@ -67,7 +89,7 @@ public class ActionFormBuilder {
      * @return The builder instance
      */
     public ActionFormBuilder pathButton(@Nonnull final String text, @Nonnull final String path) {
-        this.buttons.add(new ActionForm.Button(text, new FormImage(FormImage.Type.PATH, path)));
+        this.elements.add(new ButtonFormElement(text, new FormImage(FormImage.Type.PATH, path)));
         return this;
     }
 
@@ -79,7 +101,17 @@ public class ActionFormBuilder {
      * @return The builder instance
      */
     public ActionFormBuilder urlButton(@Nonnull final String text, @Nonnull final String url) {
-        this.buttons.add(new ActionForm.Button(text, new FormImage(FormImage.Type.URL, url)));
+        this.elements.add(new ButtonFormElement(text, new FormImage(FormImage.Type.URL, url)));
+        return this;
+    }
+
+    /**
+     * Add a divider to the form.
+     *
+     * @return The builder instance
+     */
+    public ActionFormBuilder divider() {
+        this.elements.add(new DividerFormElement());
         return this;
     }
 
@@ -87,7 +119,7 @@ public class ActionFormBuilder {
      * @return The built action form
      */
     public ActionForm build() {
-        return new ActionForm(this.title, this.text, this.buttons.toArray(new ActionForm.Button[0]));
+        return new ActionForm(this.title, this.text, this.elements.toArray(new FormElement[0]));
     }
 
 }

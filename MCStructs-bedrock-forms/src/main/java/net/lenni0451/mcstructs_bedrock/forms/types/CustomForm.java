@@ -3,9 +3,10 @@ package net.lenni0451.mcstructs_bedrock.forms.types;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import net.lenni0451.mcstructs_bedrock.forms.AForm;
+import net.lenni0451.mcstructs_bedrock.forms.Form;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
-import net.lenni0451.mcstructs_bedrock.forms.elements.AFormElement;
+import net.lenni0451.mcstructs_bedrock.forms.elements.FormElement;
+import net.lenni0451.mcstructs_bedrock.forms.elements.ModifiableFormElement;
 import net.lenni0451.mcstructs_bedrock.forms.types.builder.CustomFormBuilder;
 
 import javax.annotation.Nonnull;
@@ -21,7 +22,7 @@ import java.util.function.Function;
  * - Step Slider<br>
  * - Text Field
  */
-public class CustomForm extends AForm {
+public class CustomForm extends Form {
 
     /**
      * @return A new builder for a custom form
@@ -31,13 +32,13 @@ public class CustomForm extends AForm {
     }
 
 
-    private final AFormElement[] elements;
+    private final FormElement[] elements;
 
     /**
      * @param title    The title of the form
      * @param elements The elements of the form
      */
-    public CustomForm(@Nonnull final String title, final AFormElement... elements) {
+    public CustomForm(@Nonnull final String title, final FormElement... elements) {
         super(FormType.CUSTOM, title);
         this.elements = elements;
     }
@@ -45,21 +46,24 @@ public class CustomForm extends AForm {
     @Override
     public void setTranslator(@Nonnull Function<String, String> translator) {
         super.setTranslator(translator);
-        for (AFormElement element : this.elements) element.setTranslator(translator);
+        for (FormElement element : this.elements) element.setTranslator(translator);
     }
 
     /**
      * @return The elements of the form
      */
     @Nonnull
-    public AFormElement[] getElements() {
+    public FormElement[] getElements() {
         return this.elements;
     }
 
     @Override
     public String serializeResponse() {
         JsonArray response = new JsonArray();
-        for (AFormElement element : this.elements) response.add(element.serialize());
+        for (FormElement element : this.elements) {
+            if (!(element instanceof ModifiableFormElement)) continue;
+            response.add(((ModifiableFormElement) element).serialize());
+        }
         return response.toString();
     }
 
@@ -71,7 +75,11 @@ public class CustomForm extends AForm {
     @Override
     public void deserializeResponse(String response) throws JsonParseException {
         JsonArray responseArray = JsonParser.parseString(response).getAsJsonArray();
-        for (int i = 0; i < this.elements.length; i++) this.elements[i].deserialize(responseArray.get(i));
+        int currentResponse = 0;
+        for (FormElement element : this.elements) {
+            if (!(element instanceof ModifiableFormElement)) continue;
+            ((ModifiableFormElement) element).deserialize(responseArray.get(currentResponse++));
+        }
     }
 
 }

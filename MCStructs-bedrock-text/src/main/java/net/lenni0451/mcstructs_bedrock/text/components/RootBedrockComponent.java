@@ -1,6 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.text.components;
 
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,27 +8,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class RootBedrockComponent extends ABedrockComponent {
+public class RootBedrockComponent extends BedrockComponent {
 
-    private final List<ABedrockComponent> components;
+    private final List<BedrockComponent> components;
 
     public RootBedrockComponent() {
         this.components = new ArrayList<>();
     }
 
-    public RootBedrockComponent(final ABedrockComponent... components) {
+    public RootBedrockComponent(final BedrockComponent... components) {
         this.components = new ArrayList<>();
         this.components.addAll(Arrays.asList(components));
     }
 
-    public RootBedrockComponent(final List<ABedrockComponent> components) {
+    public RootBedrockComponent(final List<BedrockComponent> components) {
         this.components = components;
     }
 
     /**
      * @return The components of this root component
      */
-    public List<ABedrockComponent> getComponents() {
+    public List<BedrockComponent> getComponents() {
         return this.components;
     }
 
@@ -38,7 +38,7 @@ public class RootBedrockComponent extends ABedrockComponent {
      * @param component The component to add
      * @return This root component
      */
-    public RootBedrockComponent addComponent(final ABedrockComponent component) {
+    public RootBedrockComponent addComponent(final BedrockComponent component) {
         this.components.add(component);
         return this;
     }
@@ -49,9 +49,9 @@ public class RootBedrockComponent extends ABedrockComponent {
      * @param consumer The consumer that will be called for every component
      * @return This component
      */
-    public RootBedrockComponent forEach(final Consumer<ABedrockComponent> consumer) {
+    public RootBedrockComponent forEach(final Consumer<BedrockComponent> consumer) {
         consumer.accept(this);
-        for (ABedrockComponent component : this.components) {
+        for (BedrockComponent component : this.components) {
             if (component instanceof RootBedrockComponent) ((RootBedrockComponent) component).forEach(consumer);
             else consumer.accept(component);
         }
@@ -61,14 +61,14 @@ public class RootBedrockComponent extends ABedrockComponent {
     @Override
     public String asString() {
         StringBuilder out = new StringBuilder();
-        for (ABedrockComponent component : this.components) out.append(component.asString());
+        for (BedrockComponent component : this.components) out.append(component.asString());
         return out.toString();
     }
 
     @Override
-    public ABedrockComponent copy() {
+    public BedrockComponent copy() {
         RootBedrockComponent out = new RootBedrockComponent();
-        for (ABedrockComponent component : this.components) out.addComponent(component.copy());
+        for (BedrockComponent component : this.components) out.addComponent(component.copy());
         return out;
     }
 

@@ -1,9 +1,9 @@
 package net.lenni0451.mcstructs_bedrock.nbt.io.impl;
 
-import net.lenni0451.mcstructs.nbt.INbtTag;
+import net.lenni0451.mcstructs.nbt.NbtTag;
 import net.lenni0451.mcstructs.nbt.NbtType;
 import net.lenni0451.mcstructs.nbt.io.NbtHeader;
-import net.lenni0451.mcstructs.nbt.io.types.INbtWriter;
+import net.lenni0451.mcstructs.nbt.io.impl.NbtWriter;
 import net.lenni0451.mcstructs.nbt.tags.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BedrockNbtWriter implements INbtWriter {
+public class BedrockNbtWriter implements NbtWriter {
 
     @Override
     public void writeType(DataOutput out, NbtType type) throws IOException {
@@ -75,12 +75,12 @@ public class BedrockNbtWriter implements INbtWriter {
         if (value.getType() == null || value.isEmpty()) out.writeByte(NbtType.END.getId());
         else out.writeByte(value.getType().getId());
         BedrockWriteTypes.writeVarInt(out, value.size());
-        for (INbtTag tag : value.getValue()) this.write(out, tag);
+        for (NbtTag tag : value.getValue()) this.write(out, tag);
     }
 
     @Override
     public void writeCompound(DataOutput out, CompoundTag value) throws IOException {
-        for (Map.Entry<String, INbtTag> entry : value.getValue().entrySet()) {
+        for (Map.Entry<String, NbtTag> entry : value.getValue().entrySet()) {
             this.writeHeader(out, new NbtHeader(entry.getValue().getNbtType(), entry.getKey()));
             this.write(out, entry.getValue());
         }

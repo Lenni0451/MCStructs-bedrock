@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.JsonReader;
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.components.RootBedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.serializer.impl.BedrockTextDeserializer;
 import net.lenni0451.mcstructs_bedrock.text.serializer.impl.BedrockTextSerializer;
@@ -19,7 +19,7 @@ import java.io.StringReader;
 public class BedrockComponentSerializer {
 
     private static final Gson GSON = new GsonBuilder()
-            .registerTypeHierarchyAdapter(ABedrockComponent.class, new BedrockTextSerializer())
+            .registerTypeHierarchyAdapter(BedrockComponent.class, new BedrockTextSerializer())
             .registerTypeAdapter(RootBedrockComponent.class, new BedrockTextDeserializer())
             .create();
 
@@ -29,7 +29,7 @@ public class BedrockComponentSerializer {
      * @param component The component to serialize
      * @return The json string
      */
-    public static String serialize(final ABedrockComponent component) {
+    public static String serialize(final BedrockComponent component) {
         return GSON.toJson(component);
     }
 
@@ -39,7 +39,7 @@ public class BedrockComponentSerializer {
      * @param component The component to serialize
      * @return The json element
      */
-    public static JsonElement serializeJson(final ABedrockComponent component) {
+    public static JsonElement serializeJson(final BedrockComponent component) {
         return GSON.toJsonTree(component);
     }
 

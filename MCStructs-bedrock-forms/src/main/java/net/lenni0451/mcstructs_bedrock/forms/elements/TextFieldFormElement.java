@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A text field form element for the {@link CustomForm}.
  */
-public class TextFieldFormElement extends AFormElement {
+public class TextFieldFormElement extends FormElement implements ModifiableFormElement {
 
     private final String placeholder;
     private final String defaultValue;

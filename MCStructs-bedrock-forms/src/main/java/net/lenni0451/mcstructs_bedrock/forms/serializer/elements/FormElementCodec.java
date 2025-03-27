@@ -10,10 +10,10 @@ import static net.lenni0451.mcstructs_bedrock.forms.utils.JsonUtils.*;
 /**
  * A codec for all form element types.
  */
-public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeserializer<AFormElement> {
+public class FormElementCodec implements JsonSerializer<FormElement>, JsonDeserializer<FormElement> {
 
     @Override
-    public JsonElement serialize(AFormElement src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(FormElement src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject element = new JsonObject();
         element.addProperty("type", src.getType().getName());
         element.addProperty("text", src.getText(false));
@@ -50,6 +50,10 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 break;
             case HEADER:
                 break;
+            case BUTTON:
+                ButtonFormElement button = (ButtonFormElement) src;
+                if (button.getImage() != null) element.add("image", context.serialize(button.getImage()));
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + src.getType());
         }
@@ -57,7 +61,7 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
     }
 
     @Override
-    public AFormElement deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public FormElement deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject ob = ensureRootObject(json, "Form element");
         FormElementType type = FormElementType.byName(ensureContainsString(ob, "type"));
         if (type == null) throw new JsonParseException("Unknown form element type: " + ob.get("type").getAsString());
@@ -107,6 +111,9 @@ public class FormElementCodec implements JsonSerializer<AFormElement>, JsonDeser
                 return new DividerFormElement();
             case HEADER:
                 return new HeaderFormElement(text);
+            case BUTTON:
+                return new ButtonFormElement(text,
+                        hasNonNull(ob, "image") ? context.deserialize(ob.get("image"), FormImage.class) : null);
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
         }

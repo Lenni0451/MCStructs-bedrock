@@ -1,11 +1,11 @@
 package net.lenni0451.mcstructs_bedrock.nbt.io.impl;
 
-import net.lenni0451.mcstructs.nbt.INbtTag;
+import net.lenni0451.mcstructs.nbt.NbtTag;
 import net.lenni0451.mcstructs.nbt.NbtType;
 import net.lenni0451.mcstructs.nbt.exceptions.NbtReadException;
 import net.lenni0451.mcstructs.nbt.io.NbtHeader;
 import net.lenni0451.mcstructs.nbt.io.NbtReadTracker;
-import net.lenni0451.mcstructs.nbt.io.types.INbtReader;
+import net.lenni0451.mcstructs.nbt.io.impl.NbtReader;
 import net.lenni0451.mcstructs.nbt.tags.*;
 
 import javax.annotation.Nonnull;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BedrockNbtReader implements INbtReader {
+public class BedrockNbtReader implements NbtReader {
 
     @Nonnull
     @Override
@@ -84,7 +84,7 @@ public class BedrockNbtReader implements INbtReader {
     public ByteArrayTag readByteArray(DataInput in, NbtReadTracker readTracker) throws IOException {
         readTracker.read(24);
         int length = BedrockReadTypes.readVarInt(in);
-        readTracker.read(length);
+        readTracker.read(length, 1);
         byte[] value = new byte[length];
         in.readFully(value);
         return new ByteArrayTag(value);
@@ -95,7 +95,7 @@ public class BedrockNbtReader implements INbtReader {
     public StringTag readString(DataInput in, NbtReadTracker readTracker) throws IOException {
         readTracker.read(36);
         String value = BedrockReadTypes.readString(in);
-        readTracker.read(2 * value.length());
+        readTracker.read(value.length(), 2);
         return new StringTag(value);
     }
 
@@ -107,11 +107,11 @@ public class BedrockNbtReader implements INbtReader {
         int count = BedrockReadTypes.readVarInt(in);
         if (type == NbtType.END && count > 0) throw new NbtReadException("ListTag with type END and count > 0");
         if (count < 0) throw new NbtReadException("ListTag with negative count");
-        readTracker.read(4 * count);
-        List<INbtTag> value = new ArrayList<>(Math.min(count, 512));
+        readTracker.read(count, 4);
+        List<NbtTag> value = new ArrayList<>(Math.min(count, 512));
         for (int i = 0; i < count; i++) {
             readTracker.pushDepth();
-            INbtTag tag = this.read(type, in, readTracker);
+            NbtTag tag = this.read(type, in, readTracker);
             readTracker.popDepth();
             value.add(tag);
         }
@@ -122,14 +122,15 @@ public class BedrockNbtReader implements INbtReader {
     @Override
     public CompoundTag readCompound(DataInput in, NbtReadTracker readTracker) throws IOException {
         readTracker.read(48);
-        Map<String, INbtTag> value = new HashMap<>();
+        Map<String, NbtTag> value = new HashMap<>();
         while (true) {
             NbtHeader header = this.readHeader(in, readTracker);
             if (header.isEnd()) break;
-            readTracker.read(28 + 2 * header.getName().length());
+            readTracker.read(28);
+            readTracker.read(header.getName().length(), 2);
 
             readTracker.pushDepth();
-            INbtTag tag = this.read(header.getType(), in, readTracker);
+            NbtTag tag = this.read(header.getType(), in, readTracker);
             readTracker.popDepth();
             if (value.put(header.getName(), tag) != null) readTracker.read(36);
         }
@@ -141,7 +142,7 @@ public class BedrockNbtReader implements INbtReader {
     public IntArrayTag readIntArray(DataInput in, NbtReadTracker readTracker) throws IOException {
         readTracker.read(24);
         int length = BedrockReadTypes.readVarInt(in);
-        readTracker.read(4 * length);
+        readTracker.read(length, 4);
         int[] value = new int[length];
         for (int i = 0; i < value.length; i++) value[i] = BedrockReadTypes.readVarInt(in);
         return new IntArrayTag(value);

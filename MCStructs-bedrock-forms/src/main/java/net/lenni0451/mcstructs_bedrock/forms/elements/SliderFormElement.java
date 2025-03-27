@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * A slider form element for the {@link CustomForm}.
  */
-public class SliderFormElement extends AFormElement {
+public class SliderFormElement extends FormElement implements ModifiableFormElement {
 
     private final float min;
     private final float max;

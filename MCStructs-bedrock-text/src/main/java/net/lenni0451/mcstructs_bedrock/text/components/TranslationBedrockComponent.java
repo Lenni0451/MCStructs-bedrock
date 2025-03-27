@@ -1,6 +1,6 @@
 package net.lenni0451.mcstructs_bedrock.text.components;
 
-import net.lenni0451.mcstructs_bedrock.text.ABedrockComponent;
+import net.lenni0451.mcstructs_bedrock.text.BedrockComponent;
 import net.lenni0451.mcstructs_bedrock.text.utils.BedrockTranslator;
 
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class TranslationBedrockComponent extends ABedrockComponent {
+public class TranslationBedrockComponent extends BedrockComponent {
 
     private static final Function<String, String> PASSTHROUGH_TRANSLATOR = s -> s;
 
@@ -55,11 +55,11 @@ public class TranslationBedrockComponent extends ABedrockComponent {
     }
 
     @Override
-    public ABedrockComponent copy() {
+    public BedrockComponent copy() {
         Object[] copyArgs = new Object[this.args.length];
         for (int i = 0; i < this.args.length; i++) {
             Object arg = this.args[i];
-            if (arg instanceof ABedrockComponent) copyArgs[i] = ((ABedrockComponent) arg).copy();
+            if (arg instanceof BedrockComponent) copyArgs[i] = ((BedrockComponent) arg).copy();
             else copyArgs[i] = arg;
         }
         TranslationBedrockComponent component = new TranslationBedrockComponent(this.key, copyArgs);

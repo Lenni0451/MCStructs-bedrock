@@ -1,7 +1,7 @@
 package net.lenni0451.mcstructs_bedrock.forms.serializer.modal;
 
 import com.google.gson.*;
-import net.lenni0451.mcstructs_bedrock.forms.AForm;
+import net.lenni0451.mcstructs_bedrock.forms.Form;
 import net.lenni0451.mcstructs_bedrock.forms.FormType;
 import net.lenni0451.mcstructs_bedrock.forms.types.ActionForm;
 import net.lenni0451.mcstructs_bedrock.forms.types.CustomForm;
@@ -16,14 +16,14 @@ import static net.lenni0451.mcstructs_bedrock.forms.utils.JsonUtils.ensureRootOb
  * A codec for all form types.<br>
  * Form specifics are delegated to the specific codecs.
  */
-public class TypedFormCodec implements JsonSerializer<AForm>, JsonDeserializer<AForm> {
+public class TypedFormCodec implements JsonSerializer<Form>, JsonDeserializer<Form> {
 
     private final ActionFormCodec actionFormCodec = new ActionFormCodec();
     private final ModalFormCodec modalFormCodec = new ModalFormCodec();
     private final CustomFormCodec customFormCodec = new CustomFormCodec();
 
     @Override
-    public JsonElement serialize(AForm src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(Form src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject form;
         switch (src.getType()) {
             case ACTION:
@@ -43,7 +43,7 @@ public class TypedFormCodec implements JsonSerializer<AForm>, JsonDeserializer<A
     }
 
     @Override
-    public AForm deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Form deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject ob = ensureRootObject(json, "Form");
         FormType type = FormType.byName(ensureContainsString(ob, "type"));
         if (type == null) throw new JsonParseException("Unknown form type: " + ob.get("type").getAsString());
