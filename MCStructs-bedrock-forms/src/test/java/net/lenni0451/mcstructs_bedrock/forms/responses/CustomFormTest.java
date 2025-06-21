@@ -20,12 +20,12 @@ public class CustomFormTest {
 
     @Test
     void serialize() {
-        Assertions.assertEquals("[true,1,12.0,1,\"Default Text\"]", this.form.serializeResponse());
+        Assertions.assertEquals("[true,1,null,12.0,1,\"Default Text\"]", this.form.serializeResponse());
     }
 
     @Test
     void deserialize() {
-        this.form.deserializeResponse("[false,5,2.0,4,\"Test\"]");
+        this.form.deserializeResponse("[false,5,null,2.0,4,\"Test\"]");
         for (FormElement element : this.form.getElements()) {
             switch (element.getType()) {
                 case CHECKBOX:
