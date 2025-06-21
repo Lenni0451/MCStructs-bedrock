@@ -1,6 +1,7 @@
 package net.lenni0451.mcstructs_bedrock.forms.types;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import net.lenni0451.mcstructs_bedrock.forms.Form;
@@ -61,8 +62,11 @@ public class CustomForm extends Form {
     public String serializeResponse() {
         JsonArray response = new JsonArray();
         for (FormElement element : this.elements) {
-            if (!(element instanceof ModifiableFormElement)) continue;
-            response.add(((ModifiableFormElement) element).serialize());
+            if (element instanceof ModifiableFormElement) {
+                response.add(((ModifiableFormElement) element).serialize());
+            } else {
+                response.add(JsonNull.INSTANCE);
+            }
         }
         return response.toString();
     }
@@ -75,10 +79,13 @@ public class CustomForm extends Form {
     @Override
     public void deserializeResponse(String response) throws JsonParseException {
         JsonArray responseArray = JsonParser.parseString(response).getAsJsonArray();
-        int currentResponse = 0;
-        for (FormElement element : this.elements) {
+        if (responseArray.size() != this.elements.length) {
+            throw new JsonParseException("Invalid response size: expected " + this.elements.length + ", got " + responseArray.size());
+        }
+        for (int i = 0; i < this.elements.length; i++) {
+            FormElement element = this.elements[i];
             if (!(element instanceof ModifiableFormElement)) continue;
-            ((ModifiableFormElement) element).deserialize(responseArray.get(currentResponse++));
+            ((ModifiableFormElement) element).deserialize(responseArray.get(i));
         }
     }
 
