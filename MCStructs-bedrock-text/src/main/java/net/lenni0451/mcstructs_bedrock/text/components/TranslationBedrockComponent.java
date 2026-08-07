@@ -84,11 +84,11 @@ public class TranslationBedrockComponent extends BedrockComponent {
 
     @Override
     public String toString() {
-        return "TranslationBedrockComponent{" +
-                "key='" + this.key + '\'' +
-                ", args=" + Arrays.toString(this.args) +
-                ", translator=" + this.translator +
-                '}';
+        return "TranslationBedrockComponent{"
+                + "key='" + this.key + '\''
+                + ", args=" + Arrays.toString(this.args)
+                + ", translator=" + this.translator
+                + '}';
     }
 
 }

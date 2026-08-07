@@ -139,10 +139,10 @@ public class BedrockTextUtils {
 
         @Override
         public String toString() {
-            return "LegacyStyle{" +
-                    "color=" + this.color +
-                    ", styles=" + this.styles +
-                    '}';
+            return "LegacyStyle{"
+                    + "color=" + this.color
+                    + ", styles=" + this.styles
+                    + '}';
         }
 
         @Override

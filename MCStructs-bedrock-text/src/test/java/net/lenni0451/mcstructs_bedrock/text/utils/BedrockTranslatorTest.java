@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BedrockTranslatorTest {
 
-    private static final List<TestTranslation> tests = new ArrayList<>();
-    private static final Object[] args = new Object[]{"A", "B", "C", "D"};
+    private static final List<TestTranslation> TESTS = new ArrayList<>();
+    private static final Object[] ARGS = new Object[]{"A", "B", "C", "D"};
 
     @BeforeAll
     static void prepare() {
-        tests.add(new TestTranslation(
+        TESTS.add(new TestTranslation(
                 "Prefix, %s%2$s again %s and %1$s lastly %s and also %1$s again!",
                 "Prefix, sB again s and 1 lastly s and also 1 again!",
                 "Prefix, A again B and D lastly C and also D again!"
         ));
-        tests.add(new TestTranslation(
+        TESTS.add(new TestTranslation(
                 "%%s %%%s %%%%s %%%%%s",
                 "A B %C %D",
                 "%A %%B %%%C %%%%D"
@@ -29,9 +29,9 @@ class BedrockTranslatorTest {
 
     @Test
     void translate() {
-        for (TestTranslation test : tests) {
-            assertEquals(test.getTranslated(), BedrockTranslator.translate("", s -> test.getKey(), args));
-            assertEquals(test.getDirectTranslation(), BedrockTranslator.translate(test.getKey(), s -> s, args));
+        for (TestTranslation test : TESTS) {
+            assertEquals(test.getTranslated(), BedrockTranslator.translate("", s -> test.getKey(), ARGS));
+            assertEquals(test.getDirectTranslation(), BedrockTranslator.translate(test.getKey(), s -> s, ARGS));
         }
 
         assertEquals("Now playing: Lena Raine - Pigstep", BedrockTranslator.translate("record.nowPlaying", s -> {

@@ -13,6 +13,6 @@ public enum TranslatorOptions {
     /**
      * Ignore % signs the beginning of the translation key.
      */
-    IGNORE_STARTING_PERCENT;
+    IGNORE_STARTING_PERCENT,
 
 }

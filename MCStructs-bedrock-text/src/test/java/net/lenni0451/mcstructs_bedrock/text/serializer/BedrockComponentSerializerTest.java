@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BedrockComponentSerializerTest {
 
-    private static final String rawComponent = "{\"rawtext\":[{\"translate\":\"translation.test.complex\",\"with\":{\"rawtext\":[{\"text\":\"A\"},{\"text\":\"B\"},{\"text\":\"C\"},{\"text\":\"D\"}]}}]}";
-    private static final RootBedrockComponent component = new RootBedrockComponent().addComponent(new TranslationBedrockComponent("translation.test.complex", new StringBedrockComponent("A"), new StringBedrockComponent("B"), new StringBedrockComponent("C"), new StringBedrockComponent("D")));
+    private static final String RAW_COMPONENT = "{\"rawtext\":[{\"translate\":\"translation.test.complex\",\"with\":{\"rawtext\":[{\"text\":\"A\"},{\"text\":\"B\"},{\"text\":\"C\"},{\"text\":\"D\"}]}}]}";
+    private static final RootBedrockComponent COMPONENT = new RootBedrockComponent().addComponent(new TranslationBedrockComponent("translation.test.complex", new StringBedrockComponent("A"), new StringBedrockComponent("B"), new StringBedrockComponent("C"), new StringBedrockComponent("D")));
 
     @Test
     void serialize() {
-        assertEquals(rawComponent, BedrockComponentSerializer.serialize(component));
+        assertEquals(RAW_COMPONENT, BedrockComponentSerializer.serialize(COMPONENT));
     }
 
     @Test
     void deserialize() {
-        assertEquals(component, BedrockComponentSerializer.deserialize(rawComponent));
+        assertEquals(COMPONENT, BedrockComponentSerializer.deserialize(RAW_COMPONENT));
     }
 
 }

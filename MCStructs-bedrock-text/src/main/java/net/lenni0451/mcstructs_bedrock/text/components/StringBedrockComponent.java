@@ -44,9 +44,9 @@ public class StringBedrockComponent extends BedrockComponent {
 
     @Override
     public String toString() {
-        return "StringBedrockComponent{" +
-                "text='" + this.text + '\'' +
-                '}';
+        return "StringBedrockComponent{"
+                + "text='" + this.text + '\''
+                + '}';
     }
 
 }

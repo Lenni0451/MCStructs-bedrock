@@ -87,9 +87,9 @@ public class RootBedrockComponent extends BedrockComponent {
 
     @Override
     public String toString() {
-        return "RootBedrockComponent{" +
-                "components=" + this.components +
-                '}';
+        return "RootBedrockComponent{"
+                + "components=" + this.components
+                + '}';
     }
 
 }

@@ -44,9 +44,9 @@ public class SelectorBedrockComponent extends BedrockComponent {
 
     @Override
     public String toString() {
-        return "SelectorBedrockComponent{" +
-                "selector='" + this.selector + '\'' +
-                '}';
+        return "SelectorBedrockComponent{"
+                + "selector='" + this.selector + '\''
+                + '}';
     }
 
 }

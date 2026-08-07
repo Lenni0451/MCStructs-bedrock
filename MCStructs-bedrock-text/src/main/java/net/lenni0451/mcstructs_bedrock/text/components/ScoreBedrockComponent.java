@@ -53,10 +53,10 @@ public class ScoreBedrockComponent extends BedrockComponent {
 
     @Override
     public String toString() {
-        return "ScoreBedrockComponent{" +
-                "name='" + this.name + '\'' +
-                ", objective='" + this.objective + '\'' +
-                '}';
+        return "ScoreBedrockComponent{"
+                + "name='" + this.name + '\''
+                + ", objective='" + this.objective + '\''
+                + '}';
     }
 
 }
